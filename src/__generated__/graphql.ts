@@ -93,6 +93,7 @@ export type Mutation = {
   SignUp: Response;
   UpdateProjectPage: ProjectPageHttp;
   UpdateUser: UserHttp;
+  ForgotPassword: Response;
 };
 
 
@@ -169,6 +170,10 @@ export type MutationUpdateUserArgs = {
   input: UpdateUser;
 };
 
+export type MutationForgotPasswordArgs = {
+  input: ForgotPassword;
+};
+
 export type NewUser = {
   email: Scalars['String']['input'];
   firstname: Scalars['String']['input'];
@@ -225,6 +230,8 @@ export type Query = {
   GetUserByAccessToken: UserHttp;
   GetUserById: UserHttp;
   Me: UserHttp;
+
+  GetAllCountries: Array<CountryList>;
 };
 
 
@@ -305,11 +312,12 @@ export type SignInResponse = {
 
 export type SignUp = {
   email: Scalars['String']['input'];
-  firstname: Scalars['String']['input'];
-  lastname: Scalars['String']['input'];
-  middlename?: InputMaybe<Scalars['String']['input']>;
-  nickname: Scalars['String']['input'];
+  fullName: Scalars['String']['input'];
+  fullNameNative: Scalars['String']['input'];
   password: Scalars['String']['input'];
+  city: Scalars['String']['input'];
+  country: Scalars['String']['input'];
+  birthdate: Scalars['String']['input'];
 };
 
 export type UpdateProjectPage = {
@@ -349,4 +357,13 @@ export type UsersList = {
   __typename?: 'UsersList';
   countRows: Scalars['Int']['output'];
   users: Array<UserHttp>;
+};
+
+export type CountryList = {
+  __typename?: 'Country';
+  name: Scalars['String']['input'];
+};
+
+export type ForgotPassword = {
+  email: Scalars['String']['input'];
 };

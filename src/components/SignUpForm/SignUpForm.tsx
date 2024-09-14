@@ -1,24 +1,29 @@
-import { Button, Form, Input, Checkbox, notification } from 'antd';
+import { Button, Form, Input, Checkbox, notification, Select, DatePicker } from 'antd';
 import { useEffect, useState } from 'react';
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
     ;
 import { SignUpFormInputs } from './SignUpForm.types';
 
 import { Response, SignUp } from '@/__generated__/graphql';
 import { SIGN_UP } from '@/graphql/mutations';
+import { GET_COUNTRIES } from '@/graphql/query';
 import { handlingGraphqlErrors } from '@/utils';
 
+import moment from 'moment'; // For formating of the date if needed
+const { Option } = Select;
 
 function SignUpForm() {
     const [form] = Form.useForm();
+
+    const { data } = useQuery(GET_COUNTRIES);
 
     const [signUp, { loading }] = useMutation<{ SignIn: Response }, { input: SignUp }>(
         SIGN_UP,
         {
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'На ваш email была отправлена инструкция для активации.',
+                    message: 'Success!',
+                    description: 'Account activation instruction was sent to your email.',
                 })
             },
             onError: (error) => {
@@ -27,15 +32,20 @@ function SignUpForm() {
         }
     );
     const onFinish = (inputs: SignUpFormInputs) => {
+        const formattedBirthDate = inputs.birthdate
+            ? moment(inputs.birthdate).format('YYYY-MM-DD')
+            : '';
+
         signUp({
             variables: {
                 input: {
                     email: inputs.email,
                     password: inputs.password,
-                    lastname: inputs.lastname,
-                    firstname: inputs.firstname,
-                    middlename: inputs.middlename,
-                    nickname: inputs.nickname,
+                    fullName: inputs.fullName,
+                    fullNameNative: inputs.fullNameNative,
+                    city: inputs.city,
+                    country: inputs.country,
+                    birthdate: formattedBirthDate,
                 }
             }
         })
@@ -55,7 +65,7 @@ function SignUpForm() {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваш email',
+                        message: 'Please enter your email!',
                     },
                 ]}
             >
@@ -69,16 +79,16 @@ function SignUpForm() {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваш пароль',
+                        message: 'Please enter your password!',
                     },
                     {
                         min: 8,
-                        message: 'Пароль должен содержать не меньше 8 символов',
+                        message: 'Password needs to be at least 8 characters long!',
                     },
                 ]}
             >
                 <Input.Password
-                    placeholder='Пароль'
+                    placeholder='Password'
                     size='middle'
                 />
             </Form.Item>
@@ -87,77 +97,92 @@ function SignUpForm() {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, повторите пароль',
+                        message: 'Please repeat your password',
                     },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error('Пароли не совпадают!'));
+                            return Promise.reject(new Error('Passwords need to be the same!'));
                         },
                     }),
                 ]}
             >
                 <Input.Password
-                    placeholder='Пароль'
+                    placeholder='Repeat password'
                     size='middle'
                 />
             </Form.Item>
             <Form.Item
-                name='lastname'
+                name='fullName'
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите вашу Фамилию!',
+                        message: 'Please enter your full name in english!',
                     },
                 ]}
             >
                 <Input
-                    placeholder='Фамилия'
+                    placeholder='Full name in english'
                     size='middle'
                 />
             </Form.Item>
             <Form.Item
-                name='firstname'
+                name='fullNameNative'
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваше Имя!',
+                        message: 'Please enter your full name in your native language!',
                     },
                 ]}
             >
                 <Input
-                    placeholder='Имя'
+                    placeholder='Full name in your native language'
                     size='middle'
                 />
             </Form.Item>
             <Form.Item
-                name='middlename'
+                name='city'
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваше Отчество!',
+                        message: 'Please enter the name of the city!',
                     },
                 ]}
             >
                 <Input
-                    placeholder='Отчество'
+                    placeholder='City'
                     size='middle'
                 />
             </Form.Item>
             <Form.Item
-                name='nickname'
-                rules={[
-                    {
-                        required: true,
-                        message: 'Пожалуйста, введите ваш Nickname!',
-                    },
-                ]}
+                name="country"
+                rules={[{ required: true, message: 'Please select your country!' }]}
             >
-                <Input
-                    placeholder='Никнейм'
-                    size='middle'
+                <Select 
+                    placeholder="Select your country"
+                    size="middle"
+                >
+                    <Option value="United States">United States</Option>
+                    <Option value="Canada">Canada</Option>
+                    <Option value="United Kingdom">United Kingdom</Option>
+                    <Option value="Australia">Australia</Option>
+                    {data?.countries.map((country: { name: string }) => (
+                        <Option key={country.name} value={country.name}>
+                            {country.name}
+                        </Option>
+                    ))}
+                </Select>
+            </Form.Item>
+            <Form.Item
+                name="birthdate"
+                rules={[{ required: true, message: 'Please select your date of birth!' }]}
+            >
+                <DatePicker
+                    placeholder="Date of birth"
+                    format="YYYY-MM-DD"
+                    size="middle"
                 />
             </Form.Item>
             <Form.Item
@@ -166,12 +191,12 @@ function SignUpForm() {
                 rules={[
                     {
                         validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error('Ознакомьтесь с пользовательким соглашением!')),
+                            value ? Promise.resolve() : Promise.reject(new Error('Please read the terms of the user agreement!')),
                     },
                 ]}
             >
                 <Checkbox>
-                    Я прочитал условия <a href="">пользователького соглашения</a>
+                    I have read the terms of <a href="">the user agreement</a>
                 </Checkbox>
             </Form.Item>
             <Form.Item shouldUpdate>
@@ -186,7 +211,7 @@ function SignUpForm() {
                                 !!form.getFieldsError().filter(({ errors }) => errors.length).length
                             }
                         >
-                            Зарегистрироваться
+                            Sign Up
                         </Button>
                     )
                 }

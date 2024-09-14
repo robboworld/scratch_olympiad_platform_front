@@ -107,3 +107,14 @@ export const GET_SETTINGS = gql`
         }
     }
 `;
+
+export const GET_COUNTRIES = gql`
+  query GetAllCountries {
+  GetAllCountries {
+    countries {
+      name
+    }
+    countRows
+  }
+}
+`;

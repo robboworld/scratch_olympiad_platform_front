@@ -126,3 +126,11 @@ export const SET_IS_BANNED = gql`
         }
     }
 `;
+
+export const FORGOT_PASSWORD = gql`
+    mutation ForgotPassword($email: String!) {
+        ForgotPassword(email: $email) {
+            ok
+        }
+    }
+`;

@@ -5,11 +5,15 @@ import { handlingGraphqlErrors } from "@/utils";
 import { useMutation } from "@apollo/client";
 import { Spin, notification } from "antd";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 function ActivationPage() {
-    const { link } = useParams();
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const query = new URLSearchParams(location.search);
+    const activationLink = query.get('activationLink')
+
     const [confirmActivation, { loading }] = useMutation<{ ConfirmActivation: SignInResponse }, { activationLink: string }>(
         CONFIRM_ACTIVATION,
         {
@@ -26,13 +30,13 @@ function ActivationPage() {
                 navigate(PROFILE_PAGE_ROUTE)
             },
             variables: {
-                activationLink: link || ''
+                activationLink: activationLink || ''
             }
         }
     );
     useEffect(() => {
         confirmActivation();
-    }, [link, confirmActivation])
+    }, [activationLink, confirmActivation])
     return (
         <>
             {
