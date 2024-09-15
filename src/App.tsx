@@ -11,6 +11,8 @@ import StudentsPage from '@/pages/Students';
 import SettingsPage from '@/pages/Settings';
 import ProjectPage from '@/pages/ProjectPage';
 import ActivationPage from '@/pages/Activation';
+import ApplicationsPage from './pages/Applications';
+import ApplicationCreationPage from './pages/ApplicationCreation';
 import {
     ACTIVATION_PAGE_ROUTE,
     APP_SETTINGS_PAGE_ROUTE,
@@ -20,6 +22,8 @@ import {
     PROJECTS_PAGE_ROUTE,
     PROJECT_PAGE_ROUTE,
     STUDENTS_PAGE_ROUTE,
+    APPLICATIONS_PAGE_ROUTE,
+    APPLICATION_CREATION_PAGE_ROUTE,
 } from '@/consts';
 import { darkThemeConfig, defaultThemeConfig } from '@/themeConfig';
 import { useAppSelector } from '@/store';
@@ -62,6 +66,14 @@ function App() {
                                 }
                             />
                             <Route
+                                path={APPLICATIONS_PAGE_ROUTE}
+                                element={
+                                    <ProtectedRoute allowedRoles={[Roles.SuperAdmin, Roles.Student]}>
+                                        <ApplicationsPage />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
                                 path={STUDENTS_PAGE_ROUTE}
                                 element={
                                     <ProtectedRoute allowedRoles={[Roles.SuperAdmin]}>
@@ -88,6 +100,14 @@ function App() {
                             <Route
                                 path={ACTIVATION_PAGE_ROUTE}
                                 element={<ActivationPage />}
+                            />
+                            <Route
+                                path={APPLICATION_CREATION_PAGE_ROUTE}
+                                element={
+                                    <ProtectedRoute allowedRoles={[Roles.SuperAdmin, Roles.Student]}>
+                                        <ApplicationCreationPage />
+                                    </ProtectedRoute>
+                                }
                             />
                         </Routes>
                     </PageLayout>

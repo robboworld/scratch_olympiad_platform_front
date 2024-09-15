@@ -159,20 +159,17 @@ function SignUpForm() {
             <Form.Item
                 name="country"
                 rules={[{ required: true, message: 'Please select your country!' }]}
-            >
-                <Select 
-                    placeholder="Select your country"
-                    size="middle"
-                >
-                    <Option value="United States">United States</Option>
-                    <Option value="Canada">Canada</Option>
-                    <Option value="United Kingdom">United Kingdom</Option>
-                    <Option value="Australia">Australia</Option>
-                    {data?.countries.map((country: { name: string }) => (
-                        <Option key={country.name} value={country.name}>
-                            {country.name}
-                        </Option>
-                    ))}
+>
+                <Select placeholder="Select your country" size="middle" loading={!data}>
+                    {data?.GetAllCountries?.countries?.length ? (
+                        data.GetAllCountries.countries.map((country: { name: string }) => (
+                            <Option key={country.name} value={country.name}>
+                                {country.name}
+                            </Option>
+                        ))
+                    ) : (
+                        <Option disabled>No countries available</Option>
+                    )}
                 </Select>
             </Form.Item>
             <Form.Item

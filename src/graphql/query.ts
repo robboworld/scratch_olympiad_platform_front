@@ -118,3 +118,14 @@ export const GET_COUNTRIES = gql`
   }
 }
 `;
+
+export const GET_NOMINATIONS = gql`
+  query GetAllNominations {
+  GetAllNominations {
+    nominations {
+      name
+    }
+    countRows
+  }
+}
+`;

@@ -134,3 +134,14 @@ export const FORGOT_PASSWORD = gql`
         }
     }
 `;
+
+export const CREATE_APPLICATION = gql`
+    mutation CreateApplication($input: NewApplication!){
+        CreateApplication(input: $input) {
+            ... on ApplicationHttp {
+                id
+                nomination
+            }
+        }
+    }
+`;

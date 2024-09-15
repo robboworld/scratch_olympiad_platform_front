@@ -10,7 +10,8 @@ import {
   MAIN_PAGE_ROUTE,
   PROJECTS_PAGE_ROUTE,
   STUDENTS_PAGE_ROUTE,
-  APP_SETTINGS_PAGE_ROUTE
+  APP_SETTINGS_PAGE_ROUTE,
+  APPLICATIONS_PAGE_ROUTE
 } from '@/consts';
 import { Role } from '@/__generated__/graphql';
 import { useAppSelector } from '@/store';
@@ -38,11 +39,14 @@ function NavMenu() {
     case PROJECTS_PAGE_ROUTE:
       selectedKeys = '2';
       break;
-    case STUDENTS_PAGE_ROUTE:
+    case APPLICATIONS_PAGE_ROUTE:
       selectedKeys = '3';
       break;
-    case APP_SETTINGS_PAGE_ROUTE:
+    case STUDENTS_PAGE_ROUTE:
       selectedKeys = '4';
+      break;
+    case APP_SETTINGS_PAGE_ROUTE:
+      selectedKeys = '5';
       break;
     default:
       selectedKeys = '';
