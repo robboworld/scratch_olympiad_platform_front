@@ -23,7 +23,7 @@ function ThemeSwitcher({ style }: ThemeSwitcherProps) {
                     onChange={onThemeChange}
                     defaultChecked={theme === Themes.DARK}
                 />
-                <Text>Тема</Text>
+                <Text>Theme</Text>
             </Space>
         </div>
     );

@@ -15,7 +15,7 @@ export const NavMenuItems: NavMenuItem[] = [
     {
         key: '1',
         path: MAIN_PAGE_ROUTE,
-        label: 'Главная',
+        label: 'Main Page',
         icon: <HomeOutlined />,
     },
 ];
@@ -45,15 +45,15 @@ export const NavMenuItemsSuperAdmin: NavMenuItem[] = [
     {
         key: '1',
         path: MAIN_PAGE_ROUTE,
-        label: 'Главная',
+        label: 'Main Page',
         icon: <HomeOutlined />,
     },
-    {
+    /*{
         key: '2',
         path: PROJECTS_PAGE_ROUTE,
-        label: 'Проекты',
+        label: 'Projects',
         icon: <ProjectOutlined />
-    },
+    },*/
     {
         key: '3',
         path: APPLICATIONS_PAGE_ROUTE,
@@ -63,13 +63,13 @@ export const NavMenuItemsSuperAdmin: NavMenuItem[] = [
     {
         key: '4',
         path: STUDENTS_PAGE_ROUTE,
-        label: 'Ученики',
+        label: 'Students',
         icon: <TeamOutlined />
     },
     {
         key: '5',
         path: APP_SETTINGS_PAGE_ROUTE,
-        label: 'Настройки',
+        label: 'Settings',
         icon: <SettingOutlined />
     },
 ];
