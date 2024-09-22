@@ -29,12 +29,12 @@ function Profile() {
         menuItems = [
             {
                 key: '1',
-                label: <Link to={PROFILE_PAGE_ROUTE}>Профиль</Link>,
+                label: <Link to={PROFILE_PAGE_ROUTE}>Profile</Link>,
                 icon: <UserOutlined />,
             },
             {
                 key: '3',
-                label: <Link to={LOGOUT_PAGE_ROUTE}>Выйти</Link>,
+                label: <Link to={LOGOUT_PAGE_ROUTE}>Log Out</Link>,
                 icon: <LogoutOutlined />,
             },
         ];
@@ -42,7 +42,7 @@ function Profile() {
         menuItems = [
             {
                 key: '2',
-                label: <Link to={LOGIN_PAGE_ROUTE}>Войти</Link>,
+                label: <Link to={LOGIN_PAGE_ROUTE}>Sign In</Link>,
                 icon: <UserOutlined />,
             },
         ];

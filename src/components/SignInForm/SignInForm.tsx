@@ -55,7 +55,7 @@ function SignInForm() {
                     rules={[
                         {
                             required: true,
-                            message: 'Пожалуйста, введите ваш email',
+                            message: 'Please enter your email',
                         },
                     ]}
                 >
@@ -69,12 +69,12 @@ function SignInForm() {
                     rules={[
                         {
                             required: true,
-                            message: 'Пожалуйста, введите ваш пароль',
+                            message: 'Please enter your password',
                         },
                     ]}
                 >
                     <Input.Password
-                        placeholder='Пароль'
+                        placeholder='Password'
                         size='middle'
                     />
                 </Form.Item>
@@ -90,7 +90,7 @@ function SignInForm() {
                                     !!form.getFieldsError().filter(({ errors }) => errors.length).length
                                 }
                             >
-                                Войти
+                                Log In
                             </Button>
                         )
                     }
@@ -100,12 +100,12 @@ function SignInForm() {
                         style={{ cursor: 'pointer' }}
                         onClick={() => setResetPasswordModalOpen(!resetPasswordModalOpen)}
                     >
-                        Забыли пароль?
+                        Forgot your password?
                     </Typography.Text>
                 </Col>
             </Form>
             <Modal
-                title='Восстановление доступа'
+                title='Resetting the password'
                 open={resetPasswordModalOpen}
                 footer={null}
                 onCancel={() => setResetPasswordModalOpen(false)}

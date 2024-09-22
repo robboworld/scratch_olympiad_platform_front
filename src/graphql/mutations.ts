@@ -126,3 +126,22 @@ export const SET_IS_BANNED = gql`
         }
     }
 `;
+
+export const FORGOT_PASSWORD = gql`
+    mutation ForgotPassword($email: String!) {
+        ForgotPassword(email: $email) {
+            ok
+        }
+    }
+`;
+
+export const CREATE_APPLICATION = gql`
+    mutation CreateApplication($input: NewApplication!){
+        CreateApplication(input: $input) {
+            ... on ApplicationHttp {
+                id
+                nomination
+            }
+        }
+    }
+`;

@@ -11,12 +11,12 @@ function AuthModule() {
             items={[
                 {
                     key: '1',
-                    label: <Typography.Title level={3}>Вход</Typography.Title>,
+                    label: <Typography.Title level={3}>Sign In</Typography.Title>,
                     children: <SignInForm />,
                 },
                 {
                     key: '2',
-                    label: <Typography.Title level={3}>Регистация</Typography.Title>,
+                    label: <Typography.Title level={3}>Sign Up</Typography.Title>,
                     children: <SignUpForm />,
                 },
             ]}

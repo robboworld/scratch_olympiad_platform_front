@@ -23,6 +23,53 @@ export type AbsoluteMediaHttp = {
   uri_absolute: Scalars['String']['output'];
 };
 
+export type ApplicationHttp = {
+  __typename?: 'ApplicationHttp';
+  algorithmicTaskFile: Scalars['String']['output'];
+  algorithmicTaskLink: Scalars['String']['output'];
+  authorId: Scalars['ID']['output'];
+  createdAt: Scalars['Timestamp']['output'];
+  creativeTaskFile: Scalars['String']['output'];
+  creativeTaskLink: Scalars['String']['output'];
+  engineeringTaskCloudLink: Scalars['String']['output'];
+  engineeringTaskFile: Scalars['String']['output'];
+  engineeringTaskVideo: Scalars['String']['output'];
+  engineeringTaskVideoCloudLink: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  nomination: Scalars['String']['output'];
+  note: Scalars['String']['output'];
+  updatedAt: Scalars['Timestamp']['output'];
+};
+
+export type ApplicationPayloadHttp = {
+  __typename?: 'ApplicationPayloadHttp';
+  algorithmicTaskFile: Scalars['String']['output'];
+  algorithmicTaskLink: Scalars['String']['output'];
+  author: UserHttp;
+  creativeTaskFile: Scalars['String']['output'];
+  creativeTaskLink: Scalars['String']['output'];
+  engineeringTaskCloudLink: Scalars['String']['output'];
+  engineeringTaskFile: Scalars['String']['output'];
+  engineeringTaskVideo: Scalars['String']['output'];
+  engineeringTaskVideoCloudLink: Scalars['String']['output'];
+  nomination: Scalars['String']['output'];
+  note: Scalars['String']['output'];
+};
+
+export type CountryHttp = {
+  __typename?: 'CountryHttp';
+  createdAt: Scalars['Timestamp']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['Timestamp']['output'];
+};
+
+export type CountryHttpList = {
+  __typename?: 'CountryHttpList';
+  countRows: Scalars['Int']['output'];
+  countries: Array<CountryHttp>;
+};
+
 export type CourseApiMediaCollectionHttp = {
   __typename?: 'CourseAPIMediaCollectionHttp';
   banner_image?: Maybe<AbsoluteMediaHttp>;
@@ -79,13 +126,16 @@ export type MediaHttp = {
 export type Mutation = {
   __typename?: 'Mutation';
   ConfirmActivation: SignInResponse;
+  CreateApplication: ApplicationHttp;
   CreateParentRel: Response;
   CreateProjectPage: ProjectPageHttp;
   CreateUser: UserHttp;
   DeleteParentRel: Response;
   DeleteProjectPage: Response;
   DeleteUser: Response;
+  ForgotPassword: Response;
   RefreshToken: SignInResponse;
+  ResetPassword: Response;
   SetActivationByLink: Response;
   SetIsBanned: Response;
   SetUserIsActive: Response;
@@ -98,6 +148,11 @@ export type Mutation = {
 
 export type MutationConfirmActivationArgs = {
   activationLink: Scalars['String']['input'];
+};
+
+
+export type MutationCreateApplicationArgs = {
+  input: NewApplication;
 };
 
 
@@ -128,8 +183,18 @@ export type MutationDeleteUserArgs = {
 };
 
 
+export type MutationForgotPasswordArgs = {
+  email: Scalars['String']['input'];
+};
+
+
 export type MutationRefreshTokenArgs = {
   refreshToken: Scalars['String']['input'];
+};
+
+
+export type MutationResetPasswordArgs = {
+  resetLink: Scalars['String']['input'];
 };
 
 
@@ -169,24 +234,56 @@ export type MutationUpdateUserArgs = {
   input: UpdateUser;
 };
 
+export type NewApplication = {
+  algorithmicTaskFile?: InputMaybe<Scalars['String']['input']>;
+  algorithmicTaskLink?: InputMaybe<Scalars['String']['input']>;
+  creativeTaskFile?: InputMaybe<Scalars['String']['input']>;
+  creativeTaskLink?: InputMaybe<Scalars['String']['input']>;
+  engineeringTaskCloudLink?: InputMaybe<Scalars['String']['input']>;
+  engineeringTaskFile?: InputMaybe<Scalars['String']['input']>;
+  engineeringTaskVideo?: InputMaybe<Scalars['String']['input']>;
+  engineeringTaskVideoCloudLink?: InputMaybe<Scalars['String']['input']>;
+  nomination: Scalars['String']['input'];
+  note?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type NewUser = {
+  birthdate: Scalars['Timestamp']['input'];
+  city: Scalars['String']['input'];
+  country: Scalars['String']['input'];
   email: Scalars['String']['input'];
-  firstname: Scalars['String']['input'];
-  lastname: Scalars['String']['input'];
-  middlename?: InputMaybe<Scalars['String']['input']>;
-  nickname: Scalars['String']['input'];
+  fullName: Scalars['String']['input'];
+  fullNameNative: Scalars['String']['input'];
   password: Scalars['String']['input'];
   role: Role;
 };
 
 export type NewUserResponse = {
   __typename?: 'NewUserResponse';
+  birthdate: Scalars['Timestamp']['output'];
+  city: Scalars['String']['output'];
+  country: Scalars['String']['output'];
   email: Scalars['String']['output'];
-  firstname: Scalars['String']['output'];
+  fullName: Scalars['String']['output'];
+  fullNameNative: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  lastname: Scalars['String']['output'];
-  middlename: Scalars['String']['output'];
   role: Scalars['Int']['output'];
+};
+
+export type NominationHttp = {
+  __typename?: 'NominationHttp';
+  createdAt: Scalars['Timestamp']['output'];
+  id: Scalars['ID']['output'];
+  maxAge: Scalars['Int']['output'];
+  minAge: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['Timestamp']['output'];
+};
+
+export type NominationHttpList = {
+  __typename?: 'NominationHttpList';
+  countRows: Scalars['Int']['output'];
+  nominations: Array<NominationHttp>;
 };
 
 export type ProjectPageHttp = {
@@ -213,6 +310,8 @@ export type ProjectPageHttpList = {
 
 export type Query = {
   __typename?: 'Query';
+  GetAllCountries: CountryHttpList;
+  GetAllNominations: NominationHttpList;
   GetAllProjectPagesByAccessToken: ProjectPageHttpList;
   GetAllProjectPagesByAuthorId: ProjectPageHttpList;
   GetAllUsers: UsersList;
@@ -225,6 +324,18 @@ export type Query = {
   GetUserByAccessToken: UserHttp;
   GetUserById: UserHttp;
   Me: UserHttp;
+};
+
+
+export type QueryGetAllCountriesArgs = {
+  page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetAllNominationsArgs = {
+  page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -304,11 +415,12 @@ export type SignInResponse = {
 };
 
 export type SignUp = {
+  birthdate: Scalars['Timestamp']['input'];
+  city: Scalars['String']['input'];
+  country: Scalars['String']['input'];
   email: Scalars['String']['input'];
-  firstname: Scalars['String']['input'];
-  lastname: Scalars['String']['input'];
-  middlename?: InputMaybe<Scalars['String']['input']>;
-  nickname: Scalars['String']['input'];
+  fullName: Scalars['String']['input'];
+  fullNameNative: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
@@ -321,25 +433,27 @@ export type UpdateProjectPage = {
 };
 
 export type UpdateUser = {
+  birthdate: Scalars['Timestamp']['input'];
+  city: Scalars['String']['input'];
+  country: Scalars['String']['input'];
   email: Scalars['String']['input'];
-  firstname: Scalars['String']['input'];
+  fullName: Scalars['String']['input'];
+  fullNameNative: Scalars['String']['input'];
   id: Scalars['ID']['input'];
-  lastname: Scalars['String']['input'];
-  middlename: Scalars['String']['input'];
-  nickname: Scalars['String']['input'];
 };
 
 export type UserHttp = {
   __typename?: 'UserHttp';
   activationLink: Scalars['String']['output'];
+  birthdate: Scalars['Timestamp']['output'];
+  city: Scalars['String']['output'];
+  country: Scalars['String']['output'];
   createdAt: Scalars['Timestamp']['output'];
   email: Scalars['String']['output'];
-  firstname: Scalars['String']['output'];
+  fullName: Scalars['String']['output'];
+  fullNameNative: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   isActive: Scalars['Boolean']['output'];
-  lastname: Scalars['String']['output'];
-  middlename: Scalars['String']['output'];
-  nickname: Scalars['String']['output'];
   password: Scalars['String']['output'];
   role: Role;
   updatedAt: Scalars['Timestamp']['output'];
