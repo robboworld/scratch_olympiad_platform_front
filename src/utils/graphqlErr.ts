@@ -18,23 +18,23 @@ export function handlingGraphqlErrors(error: ApolloError) {
         let notificationErr: ArgsProps = { message: '' }
         switch (Code) {
             case 400:
-                notificationErr.message = 'Ошибка в запросе'
+                notificationErr.message = 'Query error'
                 notificationErr.description = handling400CodeError(Message)
                 break
             case 401:
-                notificationErr.message = 'Ошибка авторизации'
+                notificationErr.message = 'Authorization error'
                 notificationErr.description = handling401CodeError(Message)
                 break
             case 403:
-                notificationErr.message = 'Ошибка доступа'
+                notificationErr.message = 'Access error'
                 notificationErr.description = handling403CodeError(Message)
                 break
             case 500:
-                notificationErr.message = 'Ошибка на нашей стороне'
+                notificationErr.message = 'Server side error'
                 notificationErr.description = handling403CodeError(Message)
                 break
             case 503:
-                notificationErr.message = 'Функция недоступна'
+                notificationErr.message = 'Function no available'
                 notificationErr.description = handling503CodeError(Message)
                 break
         }
@@ -45,20 +45,35 @@ export function handlingGraphqlErrors(error: ApolloError) {
 function handling400CodeError(message: string): string {
     let description: string = ''
     switch (message) {
+        case StatusCode400Errors.ErrCountryNotFoundInDB:
+            description = 'Country not found.'
+            break
+        case StatusCode400Errors.ErrNominationNotFoundInDB:
+            description = 'Nomination not found.'
+            break
         case StatusCode400Errors.ErrEmailAlreadyInUse:
-            description = 'Данный email уже занят.'
+            description = 'Email already in use.'
             break
         case StatusCode400Errors.ErrAtoi:
-            description = 'Некорректный формат данных.'
+            description = 'Incorrect data format.'
+            break
+        case StatusCode400Errors.ErrTimeParse:
+            description = 'String to time error.'
             break
         case StatusCode400Errors.ErrIncorrectPasswordOrEmail:
-            description = 'Введены неверные email или пароль. Попробуйте ещё раз.'
+            description = 'Wrong email or password. Please try again.'
             break
         case StatusCode400Errors.ErrNotFoundInDB:
-            description = 'Сущность не была не найдена.'
+            description = 'Entity no found.'
             break
         case StatusCode400Errors.ErrShortPassword:
-            description = 'Пожалуйста, введите пароль, минимум 6 символов.'
+            description = 'Password needs to be at least 8 character long.'
+            break
+        case StatusCode400Errors.ErrPasswordResetLinkInvalid:
+            description = 'Password reset link invalid.'
+            break
+        case StatusCode400Errors.ErrPasswordResetLinkExpired:
+            description = 'Password reset link expired.'
             break
     }
     return description;
@@ -68,10 +83,10 @@ function handling401CodeError(message: string): string {
     let description: string = ''
     switch (message) {
         case StatusCode401Errors.ErrTokenExpired:
-            description = 'Пожалуйста, авторизуйтесь.'
+            description = 'Please, log in.'
             break
         case StatusCode401Errors.ErrNotStandardToken:
-            description = 'Некорректный формат данных для аутентификации.'
+            description = 'Incorrect data format for authentication.'
             break
     }
     return description;
@@ -81,13 +96,16 @@ function handling403CodeError(message: string): string {
     let description: string = ''
     switch (message) {
         case StatusCode403Errors.ErrUserIsNotActive:
-            description = 'Ваша учетная запись не активирована. Пожалуйста, проверьте вашу почту.'
+            description = 'Your account is not activated. Please, check your email.'
             break
         case StatusCode403Errors.ErrProjectPageIsBanned:
-            description = 'Данный проект заблокирован по решению админитратора.'
+            description = 'This project was blocked by administrator.'
             break
         case StatusCode403Errors.ErrAccessDenied:
-            description = 'Доступ запрещен.'
+            description = 'Access denied.'
+            break
+        case StatusCode403Errors.ErrDoesNotMatchAgeCategory:
+            description = 'Does not match the age category.'
             break
     }
     return description;
@@ -97,7 +115,7 @@ function handling503CodeError(message: string): string {
     let description: string = ''
     switch (message) {
         case StatusCode503Errors.ErrActivationLinkUnavailable:
-            description = 'В данный момент активация по ссылке недоступна.'
+            description = 'Activation by link is not available at the moment..'
             break
     }
     return description;

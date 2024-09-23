@@ -444,7 +444,6 @@ export type UpdateUser = {
 
 export type UserHttp = {
   __typename?: 'UserHttp';
-  activationLink: Scalars['String']['output'];
   birthdate: Scalars['Timestamp']['output'];
   city: Scalars['String']['output'];
   country: Scalars['String']['output'];

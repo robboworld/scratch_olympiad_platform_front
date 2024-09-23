@@ -6,10 +6,8 @@ export const UPDATE_USER = gql`
             ... on UserHttp {
                 id
                 email
-                nickname
-                lastname
-                firstname
-                middlename
+                fullName
+                fullNameNative
             }
         }
     }
@@ -83,6 +81,14 @@ export const CONFIRM_ACTIVATION = gql`
                 accessToken
                 refreshToken
             }
+        }
+    }
+`;
+
+export const RESET_PASSWORD = gql`
+    mutation ResetPassword($resetLink: String!){
+        ResetPassword(resetLink: $resetLink) {
+            ok
         }
     }
 `;

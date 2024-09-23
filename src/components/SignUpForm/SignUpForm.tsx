@@ -1,6 +1,7 @@
 import { Button, Form, Input, Checkbox, notification, Select, DatePicker } from 'antd';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client'
+import { useNavigate } from 'react-router-dom';
     ;
 import { SignUpFormInputs } from './SignUpForm.types';
 
@@ -13,6 +14,18 @@ import moment from 'moment'; // For formating of the date if needed
 const { Option } = Select;
 
 function SignUpForm() {
+    const navigate = useNavigate();
+
+    const handleUserAgreementClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        navigate('/user-agreement');
+    };
+
+    const handleDataProcessingClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        navigate('/personal-data-processing');
+    };
+
     const [form] = Form.useForm();
 
     const { data } = useQuery(GET_COUNTRIES);
@@ -193,7 +206,7 @@ function SignUpForm() {
                 ]}
             >
                 <Checkbox>
-                    I have read the terms of <a href="">the user agreement</a>
+                    I have read the <a href="/user-agreement" onClick={handleUserAgreementClick}>user agreement</a> and give consent to <a href="/personal-data-processing" onClick={handleDataProcessingClick}>personal data processing.</a>
                 </Checkbox>
             </Form.Item>
             <Form.Item shouldUpdate>
