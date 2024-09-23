@@ -1,8 +1,9 @@
 export interface CreateUserFormInputs {
     email: string;
     password: string;
-    lastname: string;
-    firstname: string;
-    middlename: string;
-    nickname: string;
+    fullName: string;
+    fullNameNative: string;
+    city: string;
+    country: string;
+    birthdate: string;
 }

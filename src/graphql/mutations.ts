@@ -40,10 +40,8 @@ export const CREATE_USER = gql`
             ... on UserHttp {
                 id
                 email
-                nickname
-                lastname
-                firstname
-                middlename
+                fullName
+                fullNameNative
             }
         }
     }
