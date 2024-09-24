@@ -1,11 +1,13 @@
-import { Upload, UploadProps, message } from "antd"
+import { Upload, UploadProps, message } from "antd";
 import { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload";
 
 function UploadModule() {
     const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string>();
+    const [videoUrl, setVideoUrl] = useState<string>();
+
+    const token = localStorage.getItem('access_token');
 
     const uploadButton = (
         <div>
@@ -14,22 +16,21 @@ function UploadModule() {
         </div>
     );
 
-    const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    const getBase64 = (file: RcFile, callback: (url: string) => void) => {
         const reader = new FileReader();
         reader.addEventListener('load', () => callback(reader.result as string));
-        reader.readAsDataURL(img);
+        reader.readAsDataURL(file);
     };
 
     const beforeUpload = (file: RcFile) => {
-        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-        if (!isJpgOrPng) {
-            message.error('You can only upload JPG/PNG file!');
+        const isMp4 = file.type === 'video/mp4';
+
+        if (!isMp4) {
+            message.error('You can only upload MP4 files!');
+            return Upload.LIST_IGNORE;
         }
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) {
-            message.error('Image must smaller than 2MB!');
-        }
-        return isJpgOrPng && isLt2M;
+
+        return true;
     };
 
     const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
@@ -38,10 +39,9 @@ function UploadModule() {
             return;
         }
         if (info.file.status === 'done') {
-            // Get this url from response in real world.
             getBase64(info.file.originFileObj as RcFile, (url) => {
                 setLoading(false);
-                setImageUrl(url);
+                setVideoUrl(url);
             });
         }
     };
@@ -49,18 +49,21 @@ function UploadModule() {
     return (
         <>
             <Upload
-                name="avatar"
+                name="file"
                 listType="picture-circle"
-                className="avatar-uploader"
+                className="video-uploader"
                 showUploadList={false}
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                action="http://localhost:8080/solution/" 
                 beforeUpload={beforeUpload}
                 onChange={handleChange}
+                headers={{
+                    Authorization: `Bearer ${token}`, 
+                }}
             >
-                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                {videoUrl ? <video src={videoUrl} controls style={{ width: '100%' }} /> : uploadButton}
             </Upload>
         </>
-    )
+    );
 }
 
-export default UploadModule
+export default UploadModule;
