@@ -6,10 +6,11 @@ export const GET_USER_BY_ID = gql`
             ... on UserHttp {
                 id
                 email
-                lastname
-                firstname 
-                nickname
-                middlename
+                fullName
+                fullNameNative
+                city
+                country
+                birthdate 
                 createdAt
                 role
                 updatedAt
@@ -25,10 +26,11 @@ export const ME = gql`
             ... on UserHttp {
                 id
                 email
-                lastname
-                firstname 
-                nickname
-                middlename
+                fullName
+                fullNameNative
+                city
+                country
+                birthdate 
                 createdAt
                 role
                 updatedAt
@@ -44,9 +46,8 @@ export const GET_ALL_USERS = gql`
             users {
                 id
                 email
-                lastname
-                firstname 
-                middlename
+                fullName
+                fullNameNative
             }
             countRows
         }

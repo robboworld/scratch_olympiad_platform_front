@@ -24,8 +24,8 @@ function ActivationPage() {
                 localStorage.setItem(ACCESS_TOKEN, ConfirmActivation.accessToken);
                 localStorage.setItem(REFRESH_TOKEN, ConfirmActivation.refreshToken);
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Ваш аккаунт был активирован.',
+                    message: 'Success!',
+                    description: 'Your account has been activated.',
                 })
                 navigate(PROFILE_PAGE_ROUTE)
             },

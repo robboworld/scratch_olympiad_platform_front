@@ -83,7 +83,7 @@ function StudentsTab({
             renderItem={(user, index) => (
                 <ListItem
                     index={index}
-                    renderLabel={() => <>{user.lastname} {user.firstname} {user.middlename}</>}
+                    renderLabel={() => <>{user.fullName} {user.fullNameNative} </>}
                     handleClick={() => openProfileStudent(Number(user.id))}
                     handleDelete={() => deleteUser({ variables: { id: String(user.id) } })}
                 />

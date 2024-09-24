@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { ForgotPasswordInputs } from './ForgotPassword.types';
-import { Response, ForgotPassword } from '@/__generated__/graphql';
+import { Response } from '@/__generated__/graphql';
 import { FORGOT_PASSWORD } from '@/graphql/mutations';
 import { Button, Form, Input, Typography, notification } from 'antd';
 import { useEffect, useState } from 'react';

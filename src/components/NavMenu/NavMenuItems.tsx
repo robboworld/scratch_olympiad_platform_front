@@ -27,12 +27,12 @@ export const NavMenuItemsStudent: NavMenuItem[] = [
         label: 'Home',
         icon: <HomeOutlined />,
     },
-    {
+    /*{
         key: '2',
         path: PROJECTS_PAGE_ROUTE,
         label: 'Projects',
         icon: <ProjectOutlined />
-    },
+    },*/
     {
         key: '3',
         path: APPLICATIONS_PAGE_ROUTE,

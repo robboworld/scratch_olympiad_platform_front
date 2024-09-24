@@ -11,10 +11,15 @@ import StudentsPage from '@/pages/Students';
 import SettingsPage from '@/pages/Settings';
 import ProjectPage from '@/pages/ProjectPage';
 import ActivationPage from '@/pages/Activation';
+import ResetPage from '@/pages/Reset'
 import ApplicationsPage from './pages/Applications';
 import ApplicationCreationPage from './pages/ApplicationCreation';
+import UserAgreementPage from './pages/UserAgreement';
+import PersonalDataProcessingPage from './pages/PersonalDataProcessing';
 import {
+    MAIN_PAGE_ROUTE,
     ACTIVATION_PAGE_ROUTE,
+    RESET_PASSWORD_PAGE_ROUTE,
     APP_SETTINGS_PAGE_ROUTE,
     LOGIN_PAGE_ROUTE,
     LOGOUT_PAGE_ROUTE,
@@ -24,6 +29,8 @@ import {
     STUDENTS_PAGE_ROUTE,
     APPLICATIONS_PAGE_ROUTE,
     APPLICATION_CREATION_PAGE_ROUTE,
+    USER_AGREEMENT_PAGE_ROUTE,
+    PERSONAL_DATA_PROCESSING_ROUTE,
 } from '@/consts';
 import { darkThemeConfig, defaultThemeConfig } from '@/themeConfig';
 import { useAppSelector } from '@/store';
@@ -102,12 +109,24 @@ function App() {
                                 element={<ActivationPage />}
                             />
                             <Route
+                                path={RESET_PASSWORD_PAGE_ROUTE}
+                                element={<ResetPage />}
+                            />
+                            <Route
                                 path={APPLICATION_CREATION_PAGE_ROUTE}
                                 element={
                                     <ProtectedRoute allowedRoles={[Roles.SuperAdmin, Roles.Student]}>
                                         <ApplicationCreationPage />
                                     </ProtectedRoute>
                                 }
+                            />
+                            <Route
+                                path={USER_AGREEMENT_PAGE_ROUTE}
+                                element={<UserAgreementPage />}
+                            />
+                            <Route
+                                path={PERSONAL_DATA_PROCESSING_ROUTE}
+                                element={<PersonalDataProcessingPage />}
                             />
                         </Routes>
                     </PageLayout>

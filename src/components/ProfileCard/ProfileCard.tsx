@@ -33,7 +33,7 @@ function ProfileCard({
             onCompleted: () => {
                 notification.success({
                     message: '',
-                    description: 'Успешно обновлено',
+                    description: 'Successfully updated',
                 })
             },
             onError: (error) => {
@@ -52,8 +52,8 @@ function ProfileCard({
         {
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Статус активации изменен.',
+                    message: 'Success!',
+                    description: 'Activation status updated.',
                 })
             },
             onError: (error) => {
@@ -92,10 +92,11 @@ function ProfileCard({
                             input: {
                                 id: profileData?.id || '0',
                                 email: inputs.email,
-                                firstname: inputs.firstname,
-                                lastname: inputs.lastname,
-                                middlename: inputs.middlename,
-                                nickname: inputs.nickname
+                                fullName: inputs.fullName,
+                                fullNameNative: inputs.fullNameNative,
+                                city: inputs.city,
+                                country: inputs.country,
+                                birthdate: inputs.birthdate,
                             }
                         }
                     })
@@ -104,38 +105,42 @@ function ProfileCard({
                 disabled={!isEditMode}
                 initialValues={{
                     email: profileData?.email,
-                    nickname: profileData?.nickname,
-                    firstname: profileData?.firstname,
-                    lastname: profileData?.lastname,
-                    middlename: profileData?.middlename,
+                    fullName: profileData?.fullName,
+                    fullNameNative: profileData?.fullNameNative,
+                    city: profileData?.city,
+                    country: profileData?.country,
+                    birthdate: profileData?.birthdate,
                 }}
             >
                 <Form.Item name='email'>
                     <Input placeholder={'email'} size='large' />
                 </Form.Item>
-                <Form.Item name='nickname'>
-                    <Input placeholder={'никнейм'} size='large' />
+                <Form.Item name='fullName'>
+                    <Input placeholder={'Full name'} size='large' />
                 </Form.Item>
-                <Form.Item name='lastname'>
-                    <Input placeholder={'фамилия'} size='large' />
+                <Form.Item name='fullNameNative'>
+                    <Input placeholder={'Full name in native language'} size='large' />
                 </Form.Item>
-                <Form.Item name='firstname'>
-                    <Input placeholder={'имя'} size='large' />
+                <Form.Item name='city'>
+                    <Input placeholder={'city'} size='large' />
                 </Form.Item>
-                <Form.Item name='middlename'>
-                    <Input placeholder={'отчетсво'} size='large' />
+                <Form.Item name='country'>
+                    <Input placeholder={'country'} size='large' />
                 </Form.Item>
-                <Form.Item label={'Роль: '}>
+                <Form.Item name='birthdate'>
+                    <Input placeholder={'birthdate'} size='large' />
+                </Form.Item>
+                <Form.Item label={'Role: '}>
                     {
                         profileData?.role
                     }
                 </Form.Item>
-                <Form.Item label={'Создан: '}>
+                <Form.Item label={'Created: '}>
                     {
                         profileData?.createdAt
                     }
                 </Form.Item>
-                <Form.Item label={'Последнее обновление: '}>
+                <Form.Item label={'Last updated: '}>
                     {
                         profileData?.updatedAt
                     }
@@ -144,7 +149,7 @@ function ProfileCard({
                     userRole == Roles.SuperAdmin ? (
                         <Form.Item
                             name='active'
-                            label={'Активен'}
+                            label={'Active'}
                         >
                             <Switch
                                 defaultChecked={profileData?.isActive}
@@ -170,7 +175,7 @@ function ProfileCard({
                             htmlType='submit'
                             className='profile-form-button'
                         >
-                            Сохранить
+                            Save
                         </Button>
                     </Form.Item>
                 }

@@ -37,11 +37,12 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 input: {
                     email: inputs.email,
                     password: inputs.password,
-                    lastname: inputs.lastname,
-                    firstname: inputs.firstname,
-                    middlename: inputs.middlename,
-                    nickname: inputs.nickname,
+                    fullName: inputs.fullName,
+                    fullNameNative: inputs.fullNameNative,
                     role: role,
+                    city: inputs.city,
+                    country: inputs.country,
+                    birthdate: inputs.birthdate,
                 }
             }
         })

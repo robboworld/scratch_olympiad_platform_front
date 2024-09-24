@@ -7,6 +7,7 @@ import { handlingGraphqlErrors } from '@/utils';
 import { ApplicationCreationFormInputs } from './ApplicationCreationForm.types';
 import { NewApplication } from '@/__generated__/graphql';
 import { useState } from 'react';
+import UploadModule from '../Upload';
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -111,14 +112,9 @@ function ApplicationCreationModule() {
                         </Form.Item>
                         <Form.Item>
                             <Title level={4}>Upload Algorithmic Task File</Title>
-                            <Upload
-                                showUploadList={false}
-                                beforeUpload={() => false}
+                            <UploadModule
                             >
-                                <div>
-                                    <p>Drag or click to select a file to upload</p>
-                                </div>
-                            </Upload>
+                            </UploadModule>
                         </Form.Item>
                         <Form.Item
                             name='creativeTaskLink'

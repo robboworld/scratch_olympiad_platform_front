@@ -1,9 +1,14 @@
 export enum StatusCode400Errors {
-    ErrEmailAlreadyInUse = "email already in use",
-    ErrAtoi = "string to int error",
+    ErrCountryNotFoundInDB      = "country not found",
+    ErrNominationNotFoundInDB   = "nomination not found",
+    ErrEmailAlreadyInUse        = "email already in use",
+    ErrAtoi                     = "string to int error",
+    ErrTimeParse                = "string to time error",
     ErrIncorrectPasswordOrEmail = "incorrect password or email",
-    ErrNotFoundInDB = "not found",
-    ErrShortPassword = "please input password, at least 6 symbols",
+    ErrNotFoundInDB             = "not found",
+    ErrShortPassword            = "please input password, at least 8 symbols",
+    ErrPasswordResetLinkInvalid = "password reset link invalid",
+	ErrPasswordResetLinkExpired = "password reset link expired",
 }
 
 export enum StatusCode401Errors {
@@ -15,6 +20,7 @@ export enum StatusCode403Errors {
     ErrUserIsNotActive = "user is not active. please check your email",
     ErrProjectPageIsBanned = "the projectPage is banned. no access",
     ErrAccessDenied = "access denied",
+    ErrDoesNotMatchAgeCategory = "does not match the age category",
 }
 
 export enum StatusCode503Errors {

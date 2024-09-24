@@ -184,7 +184,7 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
                         />
                     </Form.Item>
                     <Form.Item label={'Автор'}>
-                        <a onClick={() => openProfileUser(getUser.data?.GetUserById.id || '0', getUser.data?.GetUserById.role || Role.Anonymous)}>{`${getUser.data?.GetUserById.lastname} ${getUser.data?.GetUserById.firstname} ${getUser.data?.GetUserById.middlename}`}</a>
+                        <a onClick={() => openProfileUser(getUser.data?.GetUserById.id || '0', getUser.data?.GetUserById.role || Role.Anonymous)}>{`${getUser.data?.GetUserById.fullName} ${getUser.data?.GetUserById.fullNameNative} `}</a>
                     </Form.Item>
                     <Form.Item label={'Создан'}>
                         {getProjectPage.data?.GetProjectPageById.createdAt}
