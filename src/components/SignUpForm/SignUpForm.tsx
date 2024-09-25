@@ -10,7 +10,6 @@ import { SIGN_UP } from '@/graphql/mutations';
 import { GET_COUNTRIES } from '@/graphql/query';
 import { handlingGraphqlErrors } from '@/utils';
 
-import moment from 'moment'; // For formating of the date if needed
 const { Option } = Select;
 
 function SignUpForm() {
@@ -46,7 +45,7 @@ function SignUpForm() {
     );
     const onFinish = (inputs: SignUpFormInputs) => {
         const formattedBirthDate = inputs.birthdate
-            ? moment(inputs.birthdate).format('YYYY-MM-DD')
+            ? (inputs.birthdate as Date).toISOString().split('T')[0]
             : '';
 
         signUp({

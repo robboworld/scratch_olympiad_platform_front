@@ -43,9 +43,13 @@ function ApplicationCreationModule() {
                 input: {
                     nomination: inputs.nomination,
                     note: inputs.note,
+                    algorithmicTaskFile: inputs.algorithmicTaskFile,
                     algorithmicTaskLink: inputs.algorithmicTaskLink,
+                    engineeringTaskFile: inputs.engineeringTaskFile,
                     engineeringTaskCloudLink: inputs.engineeringTaskCloudLink,
+                    creativeTaskFile: inputs.creativeTaskFile,
                     creativeTaskLink: inputs.creativeTaskLink,
+                    engineeringTaskVideo: inputs.engineeringTaskVideo,
                     engineeringTaskVideoCloudLink: inputs.engineeringTaskVideoCloudLink,
                 }
             }
@@ -76,6 +80,25 @@ function ApplicationCreationModule() {
     const isFormValid = () => {
         const fieldsTouched = form.getFieldsValue();
         return form.isFieldsTouched(['nomination']) && !isNominationInvalid() && !!fieldsTouched.nomination;
+    };
+
+    const handleUploadSuccess = (fileUrl: string, fileType: string) => {
+        switch (fileType) {
+            case 'algorithmicTaskFile':
+                form.setFieldsValue({ algorithmicTaskFile: fileUrl });
+                break;
+            case 'creativeTaskFile':
+                form.setFieldsValue({ creativeTaskFile: fileUrl });
+                break;
+            case 'engineeringTaskFile':
+                form.setFieldsValue({ engineeringTaskFile: fileUrl });
+                break;
+            case 'engineeringTaskVideo':
+                form.setFieldsValue({ engineeringTaskVideo: fileUrl });
+                break;
+            default:
+                break;
+        }
     };
 
     return (
@@ -110,11 +133,11 @@ function ApplicationCreationModule() {
                                 size='middle'
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name='algorithmicTaskFile'
+                        >
                             <Title level={4}>Upload Algorithmic Task File</Title>
-                            <UploadModule
-                            >
-                            </UploadModule>
+                            <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'algorithmicTaskFile')} fileType="task" />
                         </Form.Item>
                         <Form.Item
                             name='creativeTaskLink'
@@ -124,16 +147,11 @@ function ApplicationCreationModule() {
                                 size='middle'
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name='creativeTaskFile'
+                        >
                             <Title level={4}>Upload Creative Task File</Title>
-                            <Upload
-                                showUploadList={false}
-                                beforeUpload={() => false}
-                            >
-                                <div>
-                                    <p>Drag or click to select a file to upload</p>
-                                </div>
-                            </Upload>
+                            <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'creativeTaskFile')} fileType="task" />
                         </Form.Item>
                     </>
                 )}
@@ -148,16 +166,11 @@ function ApplicationCreationModule() {
                                 size='middle'
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name='engineeringTaskFile'
+                        >
                             <Title level={4}>Upload Engineering Task File</Title>
-                            <Upload
-                                showUploadList={false}
-                                beforeUpload={() => false}
-                            >
-                                <div>
-                                    <p>Drag or click to select a file to upload</p>
-                                </div>
-                            </Upload>
+                            <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'engineeringTaskFile')} fileType="task" />
                         </Form.Item>
                         <Form.Item
                             name='engineeringTaskVideoCloudLink'
@@ -167,16 +180,11 @@ function ApplicationCreationModule() {
                                 size='middle'
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name='engineeringTaskVideo'
+                        >
                             <Title level={4}>Upload Engineering Task Video File</Title>
-                            <Upload
-                                showUploadList={false}
-                                beforeUpload={() => false}
-                            >
-                                <div>
-                                    <p>Drag or click to select a file to upload</p>
-                                </div>
-                            </Upload>
+                            <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'engineeringTaskVideo')} fileType="video" />
                         </Form.Item>
                     </>
                 )}
