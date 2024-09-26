@@ -5,5 +5,5 @@ export interface SignUpFormInputs {
     fullNameNative: string;
     city: string;
     country: string;
-    birthdate: string;
+    birthdate: Date;
 }
