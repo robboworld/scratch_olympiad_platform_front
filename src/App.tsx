@@ -16,6 +16,7 @@ import ApplicationsPage from './pages/Applications';
 import ApplicationCreationPage from './pages/ApplicationCreation';
 import UserAgreementPage from './pages/UserAgreement';
 import PersonalDataProcessingPage from './pages/PersonalDataProcessing';
+import HomePage from './pages/HomePage';
 import {
     MAIN_PAGE_ROUTE,
     ACTIVATION_PAGE_ROUTE,
@@ -47,6 +48,10 @@ function App() {
                 <BrowserRouter>
                     <PageLayout>
                         <Routes>
+                            <Route
+                                path={MAIN_PAGE_ROUTE}
+                                element={<HomePage />}
+                            />
                             <Route
                                 path={LOGIN_PAGE_ROUTE}
                                 element={<LoginPage />}

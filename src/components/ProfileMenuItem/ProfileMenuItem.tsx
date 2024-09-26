@@ -42,7 +42,7 @@ function Profile() {
         menuItems = [
             {
                 key: '2',
-                label: <Link to={LOGIN_PAGE_ROUTE}>Sign In</Link>,
+                label: <Link to={LOGIN_PAGE_ROUTE}>Sign in</Link>,
                 icon: <UserOutlined />,
             },
         ];
