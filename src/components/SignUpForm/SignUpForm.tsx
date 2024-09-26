@@ -136,7 +136,7 @@ function SignUpForm() {
                 ]}
             >
                 <Input
-                    placeholder='Full name in english'
+                    placeholder='Full name in English'
                     size='middle'
                 />
             </Form.Item>
@@ -155,20 +155,6 @@ function SignUpForm() {
                 />
             </Form.Item>
             <Form.Item
-                name='city'
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter the name of the city!',
-                    },
-                ]}
-            >
-                <Input
-                    placeholder='City'
-                    size='middle'
-                />
-            </Form.Item>
-            <Form.Item
                 name="country"
                 rules={[{ required: true, message: 'Please select your country!' }]}
 >
@@ -183,6 +169,20 @@ function SignUpForm() {
                         <Option disabled>No countries available</Option>
                     )}
                 </Select>
+            </Form.Item>
+            <Form.Item
+                name='city'
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please enter the name of the city!',
+                    },
+                ]}
+            >
+                <Input
+                    placeholder='City'
+                    size='middle'
+                />
             </Form.Item>
             <Form.Item
                 name="birthdate"

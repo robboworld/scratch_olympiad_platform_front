@@ -69,7 +69,7 @@ function ProfileModule() {
                     <Col xs={23} sm={23} md={23} lg={8} xl={8}>
                         <Space direction='vertical' size={'middle'}>
                             <AvatarComponent />
-                            <ProfileCard isEditMode={true} profileData={data?.Me} />
+                            <ProfileCard isEditMode={false} profileData={data?.Me} />
                         </Space>
                     </Col>
                 </Row>

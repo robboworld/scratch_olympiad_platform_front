@@ -12,21 +12,21 @@ import {
 import { NavMenuItem } from './NavMenu.types';
 
 export const NavMenuItems: NavMenuItem[] = [
-    {
+    /*{
         key: '1',
         path: MAIN_PAGE_ROUTE,
         label: 'Main Page',
         icon: <HomeOutlined />,
-    },
+    },*/
 ];
 
 export const NavMenuItemsStudent: NavMenuItem[] = [
-    {
+    /*{
         key: '1',
         path: MAIN_PAGE_ROUTE,
         label: 'Home',
         icon: <HomeOutlined />,
-    },
+    },*/
     /*{
         key: '2',
         path: PROJECTS_PAGE_ROUTE,
@@ -42,12 +42,12 @@ export const NavMenuItemsStudent: NavMenuItem[] = [
 ];
 
 export const NavMenuItemsSuperAdmin: NavMenuItem[] = [
-    {
+    /*{
         key: '1',
         path: MAIN_PAGE_ROUTE,
         label: 'Main Page',
         icon: <HomeOutlined />,
-    },
+    },*/
     /*{
         key: '2',
         path: PROJECTS_PAGE_ROUTE,

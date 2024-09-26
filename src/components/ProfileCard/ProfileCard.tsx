@@ -130,21 +130,6 @@ function ProfileCard({
                 <Form.Item name='birthdate'>
                     <Input placeholder={'birthdate'} size='large' />
                 </Form.Item>
-                <Form.Item label={'Role: '}>
-                    {
-                        profileData?.role
-                    }
-                </Form.Item>
-                <Form.Item label={'Created: '}>
-                    {
-                        profileData?.createdAt
-                    }
-                </Form.Item>
-                <Form.Item label={'Last updated: '}>
-                    {
-                        profileData?.updatedAt
-                    }
-                </Form.Item>
                 {
                     userRole == Roles.SuperAdmin ? (
                         <Form.Item

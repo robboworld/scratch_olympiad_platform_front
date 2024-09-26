@@ -18,10 +18,10 @@ function ApplicationCreationModule() {
 
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
-    const ScratchNominations = ['ScratchKid', 'ScratchChild','ScratchTween',
-        'ScratchTeen','ScratchYouth','ScratchMaster',
+    const ScratchNominations = ['ScratchKid (7-8)', 'ScratchChild (9-10)','ScratchTween (11-12)',
+        'ScratchTeen (13-14)','ScratchYouth (15-18)','ScratchMaster (18-older)',
     ];
-    const RobboScratchNominations = ['RobboChild', 'RobboTeen', 'RobboYouth', 'RobboMaster'];
+    const RobboScratchNominations = ['RobboChild (7-10)', 'RobboTeen (11-14)', 'RobboYouth (15-18)', 'RobboMaster (18-older)'];
 
     const [createApplication, { loading }] = useMutation<{ CreateApplication: Response }, { input: NewApplication }>(
         CREATE_APPLICATION,
@@ -105,13 +105,13 @@ function ApplicationCreationModule() {
         <>
             <Form onFinish={onFinish} form={form}>
                 <Form.Item name="applicationType" rules={[{ required: true, message: 'Please select an application type!' }]}>
-                    <Select placeholder="Select application type" size="middle" onChange={handleTypeChange}>
+                    <Select placeholder="Please choose a discipline" size="middle" onChange={handleTypeChange}>
                         <Option value="Scratch">Scratch</Option>
                         <Option value="RobboScratch">RobboScratch</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item name="nomination" rules={[{ required: true, message: 'Please select your nomination!' }]}>
-                    <Select placeholder="Select your nomination" size="middle" loading={!data} disabled={!selectedType}>
+                    <Select placeholder="Please choose your nomination" size="middle" loading={!data} disabled={!selectedType}>
                         {filteredNominations?.length ? (
                             filteredNominations.map((nomination: { name: string }) => (
                                 <Option key={nomination.name} value={nomination.name}>
@@ -125,23 +125,27 @@ function ApplicationCreationModule() {
                 </Form.Item>
                 {selectedType === 'Scratch' && (
                     <>
+                        <Title level={4}>Algorithmic task</Title>
                         <Form.Item
                             name='algorithmicTaskLink'
                         >
+                            <Title level={5}>Enter the link to your Algorithmic task project</Title>
                             <Input
-                                placeholder='Algorithmic Task Link'
+                                placeholder='Algorithmic ask Link'
                                 size='middle'
                             />
                         </Form.Item>
                         <Form.Item
                             name='algorithmicTaskFile'
                         >
-                            <Title level={4}>Upload Algorithmic Task File</Title>
+                            <Title level={5}>or upload your Algorithmic task project sb3 file</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'algorithmicTaskFile')} fileType="task" />
                         </Form.Item>
+                        <Title level={4}>Creative task</Title>
                         <Form.Item
                             name='creativeTaskLink'
                         >
+                            <Title level={5}>Enter the link to your Creative task project</Title>
                             <Input
                                 placeholder='Creative Task Link'
                                 size='middle'
@@ -150,7 +154,7 @@ function ApplicationCreationModule() {
                         <Form.Item
                             name='creativeTaskFile'
                         >
-                            <Title level={4}>Upload Creative Task File</Title>
+                            <Title level={5}>or upload your Creative task project sb3 file" и поле загрузки файла</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'creativeTaskFile')} fileType="task" />
                         </Form.Item>
                     </>
@@ -158,32 +162,51 @@ function ApplicationCreationModule() {
 
                 {selectedType === 'RobboScratch' && (
                     <>
+                        <Title level={4}>Algorithmic task</Title>
+                        <Form.Item
+                            name='algorithmicTaskLink'
+                        >
+                            <Title level={5}>Enter the link to your Algorithmic task project</Title>
+                            <Input
+                                placeholder='Algorithmic ask Link'
+                                size='middle'
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            name='algorithmicTaskFile'
+                        >
+                            <Title level={5}>or upload your Algorithmic task project sb3 file</Title>
+                            <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'algorithmicTaskFile')} fileType="task" />
+                        </Form.Item>
+                        <Title level={4}>Engineering task</Title>
                         <Form.Item
                             name='engineeringTaskCloudLink'
                         >
+                            <Title level={5}>Enter the link to your Engineering task project</Title>
                             <Input
-                                placeholder='Engineering Task Link'
+                                placeholder='Enter the link to your Engineering task project'
                                 size='middle'
                             />
                         </Form.Item>
                         <Form.Item
                             name='engineeringTaskFile'
                         >
-                            <Title level={4}>Upload Engineering Task File</Title>
+                            <Title level={5}>or upload your Engineering task project sb3 file</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'engineeringTaskFile')} fileType="task" />
                         </Form.Item>
                         <Form.Item
                             name='engineeringTaskVideoCloudLink'
                         >
+                            <Title level={5}>Enter the link to your Engineering task project video</Title>
                             <Input
-                                placeholder='Engineering Task Video Link'
+                                placeholder='Enter the link to your Engineering task project video'
                                 size='middle'
                             />
                         </Form.Item>
                         <Form.Item
                             name='engineeringTaskVideo'
                         >
-                            <Title level={4}>Upload Engineering Task Video File</Title>
+                            <Title level={5}>or upload your Engineering task project video</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'engineeringTaskVideo')} fileType="video" />
                         </Form.Item>
                     </>
@@ -192,7 +215,7 @@ function ApplicationCreationModule() {
                     <Input.TextArea
                         size='large'
                         rows={4}
-                        placeholder='Notes'
+                        placeholder='Notes, if necessary'
                     />
                 </Form.Item>
                 <Form.Item shouldUpdate>
