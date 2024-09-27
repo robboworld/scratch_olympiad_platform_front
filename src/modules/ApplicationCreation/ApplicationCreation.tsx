@@ -21,9 +21,6 @@ function ApplicationCreationModule() {
 
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
-    const ScratchQuizzes = ['test1', 'test2','test3',];
-    const RobboQuizzes = ['test4', 'test5','test6',];
-
     const ScratchNominations = ['ScratchKid, 7-8 year old', 'ScratchChild, 9-10 year old','ScratchTween, 11-12 year old',
         'ScratchTeen, 13-14 year old','ScratchYouth, 15-18 year old','ScratchMaster, 18 and older',
     ];
@@ -132,44 +129,36 @@ function ApplicationCreationModule() {
                 </Form.Item>
                 {selectedType === 'Scratch' && (
                     <>
-                        <Title level={4}>Scratch quizzes</Title>
-                        {
-                            ScratchQuizzes.map((quizz: string ) => (
-                                <p key={quizz}>
-                                    {quizz}
-                                </p>
-                            ))
-                        }
                         <Title level={4}>Algorithmic task</Title>
+                        <Title level={5}>Enter the link to your Algorithmic task project</Title>
                         <Form.Item
                             name='algorithmicTaskLink'
                         >
-                            <Title level={5}>Enter the link to your Algorithmic task project</Title>
                             <Input
                                 placeholder='Enter the link to your Algorithmic task project'
                                 size='middle'
                             />
                         </Form.Item>
+                        <Title level={5}>or upload your Algorithmic task project sb3 file</Title>
                         <Form.Item
                             name='algorithmicTaskFile'
                         >
-                            <Title level={5}>or upload your Algorithmic task project sb3 file</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'algorithmicTaskFile')} fileType="task" />
                         </Form.Item>
                         <Title level={4}>Creative task</Title>
+                        <Title level={5}>Enter the link to your Creative task project</Title>
                         <Form.Item
                             name='creativeTaskLink'
                         >
-                            <Title level={5}>Enter the link to your Creative task project</Title>
                             <Input
                                 placeholder='Enter the link to your Creative task project'
                                 size='middle'
                             />
                         </Form.Item>
+                        <Title level={5}>or upload your Creative task project sb3 file</Title>
                         <Form.Item
                             name='creativeTaskFile'
                         >
-                            <Title level={5}>or upload your Creative task project sb3 file</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'creativeTaskFile')} fileType="task" />
                         </Form.Item>
                     </>
@@ -177,59 +166,51 @@ function ApplicationCreationModule() {
 
                 {selectedType === 'RobboScratch' && (
                     <>
-                        <Title level={4}>Robbo quizzes</Title>
-                        {
-                            RobboQuizzes.map((quizz: string ) => (
-                                <p key={quizz}>
-                                    {quizz}
-                                </p>
-                            ))
-                        }
                         <Title level={4}>Algorithmic task</Title>
+                        <Title level={5}>Enter the link to your Algorithmic task project</Title>
                         <Form.Item
                             name='algorithmicTaskLink'
                         >
-                            <Title level={5}>Enter the link to your Algorithmic task project</Title>
                             <Input
                                 placeholder='Algorithmic ask Link'
                                 size='middle'
                             />
                         </Form.Item>
+                        <Title level={5}>or upload your Algorithmic task project sb3 file</Title>
                         <Form.Item
                             name='algorithmicTaskFile'
                         >
-                            <Title level={5}>or upload your Algorithmic task project sb3 file</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'algorithmicTaskFile')} fileType="task" />
                         </Form.Item>
                         <Title level={4}>Engineering task</Title>
+                        <Title level={5}>Enter the link to your Engineering task project</Title>
                         <Form.Item
                             name='engineeringTaskCloudLink'
                         >
-                            <Title level={5}>Enter the link to your Engineering task project</Title>
                             <Input
                                 placeholder='Enter the link to your Engineering task project'
                                 size='middle'
                             />
                         </Form.Item>
+                        <Title level={5}>or upload your Engineering task project sb3 file</Title>
                         <Form.Item
                             name='engineeringTaskFile'
                         >
-                            <Title level={5}>or upload your Engineering task project sb3 file</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'engineeringTaskFile')} fileType="task" />
                         </Form.Item>
+                        <Title level={5}>Enter the link to your Engineering task project video</Title>
                         <Form.Item
                             name='engineeringTaskVideoCloudLink'
                         >
-                            <Title level={5}>Enter the link to your Engineering task project video</Title>
                             <Input
                                 placeholder='Enter the link to your Engineering task project video'
                                 size='middle'
                             />
                         </Form.Item>
+                        <Title level={5}>or upload your Engineering task project video</Title>
                         <Form.Item
                             name='engineeringTaskVideo'
                         >
-                            <Title level={5}>or upload your Engineering task project video</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'engineeringTaskVideo')} fileType="video" />
                         </Form.Item>
                     </>
