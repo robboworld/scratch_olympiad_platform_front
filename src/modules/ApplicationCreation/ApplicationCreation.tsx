@@ -21,9 +21,6 @@ function ApplicationCreationModule() {
 
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
-    const ScratchQuizzes = ['test1', 'test2','test3',];
-    const RobboQuizzes = ['test4', 'test5','test6',];
-
     const ScratchNominations = ['ScratchKid, 7-8 year old', 'ScratchChild, 9-10 year old','ScratchTween, 11-12 year old',
         'ScratchTeen, 13-14 year old','ScratchYouth, 15-18 year old','ScratchMaster, 18 and older',
     ];
@@ -132,14 +129,6 @@ function ApplicationCreationModule() {
                 </Form.Item>
                 {selectedType === 'Scratch' && (
                     <>
-                        <Title level={4}>Scratch quizzes</Title>
-                        {
-                            ScratchQuizzes.map((quizz: string ) => (
-                                <p key={quizz}>
-                                    {quizz}
-                                </p>
-                            ))
-                        }
                         <Title level={4}>Algorithmic task</Title>
                         <Form.Item
                             name='algorithmicTaskLink'
@@ -177,14 +166,6 @@ function ApplicationCreationModule() {
 
                 {selectedType === 'RobboScratch' && (
                     <>
-                        <Title level={4}>Robbo quizzes</Title>
-                        {
-                            RobboQuizzes.map((quizz: string ) => (
-                                <p key={quizz}>
-                                    {quizz}
-                                </p>
-                            ))
-                        }
                         <Title level={4}>Algorithmic task</Title>
                         <Form.Item
                             name='algorithmicTaskLink'
