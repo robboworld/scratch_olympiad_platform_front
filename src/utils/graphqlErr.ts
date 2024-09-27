@@ -78,6 +78,9 @@ function handling400CodeError(message: string): string {
         case StatusCode400Errors.ErrUserWithEmailNotFound:
             description = 'User with this email not found.'
             break
+        case StatusCode400Errors.ErrApplicationAlreadySubmitted:
+            description = 'application already submitted.'
+            break
     }
     return description;
 }

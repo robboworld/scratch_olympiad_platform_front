@@ -2,6 +2,7 @@ import { Upload, UploadProps, message } from "antd";
 import { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload";
+import { handlingGraphqlErrors } from '@/utils';
 
 
 // File size limit (100MB in bytes)
@@ -59,6 +60,10 @@ function UploadModule({ onUploadSuccess, fileType }: UploadModuleProps) {
             } else {
                 message.error('Failed to get file URL from the response');
             }
+        }
+        if (info.file.status === 'error') {
+            setLoading(false);
+            message.error('File upload failed due to a token being expired. Please refresh the page and try again.');
         }
     };
 

@@ -10,6 +10,7 @@ export enum StatusCode400Errors {
     ErrPasswordResetLinkInvalid = "password reset link invalid",
 	ErrPasswordResetLinkExpired = "password reset link expired",
     ErrUserWithEmailNotFound    = "user with this email not found",
+    ErrApplicationAlreadySubmitted = "application already submitted",
 }
 
 export enum StatusCode401Errors {
