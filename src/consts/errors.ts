@@ -9,6 +9,7 @@ export enum StatusCode400Errors {
     ErrShortPassword            = "please input password, at least 8 symbols",
     ErrPasswordResetLinkInvalid = "password reset link invalid",
 	ErrPasswordResetLinkExpired = "password reset link expired",
+    ErrUserWithEmailNotFound    = "user with this email not found",
 }
 
 export enum StatusCode401Errors {

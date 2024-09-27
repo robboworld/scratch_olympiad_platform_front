@@ -142,12 +142,6 @@ function SignUpForm() {
             </Form.Item>
             <Form.Item
                 name='fullNameNative'
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter your full name in your native language!',
-                    },
-                ]}
             >
                 <Input
                     placeholder='Full name in your native language'
