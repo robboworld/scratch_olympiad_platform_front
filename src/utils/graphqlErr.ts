@@ -75,6 +75,9 @@ function handling400CodeError(message: string): string {
         case StatusCode400Errors.ErrPasswordResetLinkExpired:
             description = 'Password reset link expired.'
             break
+        case StatusCode400Errors.ErrUserWithEmailNotFound:
+            description = 'User with this email not found.'
+            break
     }
     return description;
 }

@@ -3,6 +3,10 @@ import { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload";
 
+
+// File size limit (100MB in bytes)
+const MAX_FILE_SIZE = 100 * 1024 * 1024;
+
 interface UploadModuleProps {
     onUploadSuccess: (fileUrl: string) => void;
     fileType: 'task' | 'video';
@@ -24,6 +28,11 @@ function UploadModule({ onUploadSuccess, fileType }: UploadModuleProps) {
     const beforeUpload = (file: RcFile) => {
         const isSb3 = file.name.endsWith('.sb3');
         const isMp4 = file.type === 'video/mp4';
+
+        if (file.size > MAX_FILE_SIZE) {
+            message.error('File size must be less than 100MB!');
+            return Upload.LIST_IGNORE;
+        }
 
         if (fileType === 'task' && !isSb3) {
             message.error('You can only upload SB3 files for task!');

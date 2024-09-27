@@ -4,6 +4,7 @@ import { Response } from '@/__generated__/graphql';
 import { FORGOT_PASSWORD } from '@/graphql/mutations';
 import { Button, Form, Input, Typography, notification } from 'antd';
 import { useEffect, useState } from 'react';
+import { handlingGraphqlErrors } from '@/utils';
 
 function ForgotPasswordModal() {
     const [form] = Form.useForm();
@@ -18,10 +19,7 @@ function ForgotPasswordModal() {
             });
         },
         onError: (error) => {
-            notification.error({
-                message: 'Error',
-                description: error.message,
-            });
+            handlingGraphqlErrors(error)
         },
     });
 

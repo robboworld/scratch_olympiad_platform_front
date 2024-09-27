@@ -131,7 +131,7 @@ function ApplicationCreationModule() {
                         >
                             <Title level={5}>Enter the link to your Algorithmic task project</Title>
                             <Input
-                                placeholder='Algorithmic ask Link'
+                                placeholder='Enter the link to your Algorithmic task project'
                                 size='middle'
                             />
                         </Form.Item>
@@ -147,14 +147,14 @@ function ApplicationCreationModule() {
                         >
                             <Title level={5}>Enter the link to your Creative task project</Title>
                             <Input
-                                placeholder='Creative Task Link'
+                                placeholder='Enter the link to your Creative task project'
                                 size='middle'
                             />
                         </Form.Item>
                         <Form.Item
                             name='creativeTaskFile'
                         >
-                            <Title level={5}>or upload your Creative task project sb3 file" и поле загрузки файла</Title>
+                            <Title level={5}>or upload your Creative task project sb3 file</Title>
                             <UploadModule onUploadSuccess={(url) => handleUploadSuccess(url, 'creativeTaskFile')} fileType="task" />
                         </Form.Item>
                     </>

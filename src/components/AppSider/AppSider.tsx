@@ -2,7 +2,7 @@ import { Divider, Layout, Row } from 'antd';
 
 import styles from './AppSider.module.scss';
 
-// import { ReactComponent as Logo } from '@/assets/logo.svg';
+import logo from '@/assets/ScratchOlympiad-2024_logo_1440x643.png';
 
 import { Colors } from '@/consts';
 import NavMenu from '@/components/NavMenu';
@@ -25,8 +25,7 @@ function AppSider() {
 		>
 			<Row justify='center'>
 				<div className={styles.logo}>
-					{/* <Logo /> */}
-					LOGO
+				<img src={logo} alt="Logo" className={styles.logoImage} />
 				</div>
 			</Row>
 			<Divider style={{ margin: '12px 0' }} />

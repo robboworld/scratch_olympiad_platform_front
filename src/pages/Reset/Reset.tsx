@@ -4,40 +4,50 @@ import { handlingGraphqlErrors } from "@/utils";
 import { useMutation } from "@apollo/client";
 import { Spin, notification } from "antd";
 import { useEffect } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function ResetPage() {
     const location = useLocation();
     const navigate = useNavigate();
 
     const query = new URLSearchParams(location.search);
-    const resetLink = query.get('resetLink')
+    const resetLink = query.get('resetLink');
 
     const [resetPassword, { loading }] = useMutation<{ ResetPassword: SignInResponse }, { resetLink: string }>(
         RESET_PASSWORD,
         {
             onError: (error) => {
-                handlingGraphqlErrors(error)
+                handlingGraphqlErrors(error);
             },
-            onCompleted: ({ResetPassword}) => {
+            onCompleted: () => {
                 notification.success({
                     message: 'Success!',
-                    description: 'Pass reset.',
-                })
-            },
-            variables: {
-                resetLink: resetLink || ''
+                    description: 'Password Reset',
+                });
+                navigate('/login');
             }
         }
     );
+
     useEffect(() => {
-        resetPassword();
-    }, [resetLink, resetPassword])
+        if (resetLink) {
+            resetPassword({
+                variables: {
+                    resetLink: resetLink
+                }
+            });
+        } else {
+            notification.error({
+                message: 'Error',
+                description: 'Invalid or missing reset link.',
+            });
+            navigate('/login');
+        }
+    }, [resetLink, resetPassword, navigate]);
+
     return (
         <>
-            {
-                loading && <Spin size={'large'} />
-            }
+            {loading && <Spin size={'large'} />}
         </>
     );
 }

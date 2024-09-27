@@ -9,12 +9,10 @@
 
 .logo {
     padding: 10px;
-    background-color: var(--color-primary);
-    border-radius: 100%;
     margin-top: 12px;
 
-    svg {
-        width: 30px;
-        height: 30px;
+    img.logoImage{
+        width: 175px;
+        height: 100%;
     }
 }
