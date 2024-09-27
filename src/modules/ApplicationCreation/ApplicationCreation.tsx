@@ -8,6 +8,8 @@ import { ApplicationCreationFormInputs } from './ApplicationCreationForm.types';
 import { NewApplication } from '@/__generated__/graphql';
 import { useState } from 'react';
 import UploadModule from '../Upload';
+import { APPLICATIONS_PAGE_ROUTE } from '@/consts';
+import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -15,13 +17,14 @@ const { Title } = Typography;
 function ApplicationCreationModule() {
     const [form] = Form.useForm();
     const { data } = useQuery(GET_NOMINATIONS);
+    const navigate = useNavigate();
 
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
-    const ScratchNominations = ['ScratchKid (7-8)', 'ScratchChild (9-10)','ScratchTween (11-12)',
-        'ScratchTeen (13-14)','ScratchYouth (15-18)','ScratchMaster (18-older)',
+    const ScratchNominations = ['ScratchKid, 7-8 year old', 'ScratchChild, 9-10 year old','ScratchTween, 11-12 year old',
+        'ScratchTeen, 13-14 year old','ScratchYouth, 15-18 year old','ScratchMaster, 18 and older',
     ];
-    const RobboScratchNominations = ['RobboChild (7-10)', 'RobboTeen (11-14)', 'RobboYouth (15-18)', 'RobboMaster (18-older)'];
+    const RobboScratchNominations = ['RobboChild, 7-10 year old', 'RobboTeen, 11-14 year old', 'RobboYouth, 15-18 year old', 'RobboMaster, 18 and older'];
 
     const [createApplication, { loading }] = useMutation<{ CreateApplication: Response }, { input: NewApplication }>(
         CREATE_APPLICATION,
@@ -30,7 +33,8 @@ function ApplicationCreationModule() {
                 notification.success({
                     message: 'Success!',
                     description: 'Application created successfully.',
-                })
+                });
+                navigate(APPLICATIONS_PAGE_ROUTE);
             },
             onError: (error) => {
                 handlingGraphqlErrors(error)

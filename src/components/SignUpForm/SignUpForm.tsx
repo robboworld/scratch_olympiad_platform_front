@@ -9,6 +9,7 @@ import { Response, SignUp } from '@/__generated__/graphql';
 import { SIGN_UP } from '@/graphql/mutations';
 import { GET_COUNTRIES } from '@/graphql/query';
 import { handlingGraphqlErrors } from '@/utils';
+import { MAIN_PAGE_ROUTE } from '@/consts';
 
 const { Option } = Select;
 
@@ -36,7 +37,8 @@ function SignUpForm() {
                 notification.success({
                     message: 'Success!',
                     description: 'Account activation instruction was sent to your email.',
-                })
+                });
+                navigate(MAIN_PAGE_ROUTE);
             },
             onError: (error) => {
                 handlingGraphqlErrors(error)
@@ -61,6 +63,8 @@ function SignUpForm() {
                 }
             }
         })
+
+        
     };
     const [, forceUpdate] = useState({});
     useEffect(() => {
@@ -199,7 +203,7 @@ function SignUpForm() {
                 ]}
             >
                 <Checkbox>
-                    I have read the <a href="/user-agreement" onClick={handleUserAgreementClick}>user agreement</a> and give consent to <a href="/personal-data-processing" onClick={handleDataProcessingClick}>personal data processing.</a>
+                    I have read the <a href="/user-agreement" onClick={handleUserAgreementClick}>user agreement</a> and the <a href="/personal-data-processing" onClick={handleDataProcessingClick}>privacy policy.</a>
                 </Checkbox>
             </Form.Item>
             <Form.Item shouldUpdate>
