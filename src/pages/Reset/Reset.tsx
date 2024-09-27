@@ -11,7 +11,7 @@ function ResetPage() {
     const navigate = useNavigate();
 
     const query = new URLSearchParams(location.search);
-    const resetLink = query.get('resetLink');
+    const resetToken = query.get('resetToken'); 
 
     const [resetPassword, { loading }] = useMutation<{ ResetPassword: SignInResponse }, { resetLink: string }>(
         RESET_PASSWORD,
@@ -19,7 +19,7 @@ function ResetPage() {
             onError: (error) => {
                 handlingGraphqlErrors(error);
             },
-            onCompleted: () => {
+            onCompleted: ({ ResetPassword }) => {
                 notification.success({
                     message: 'Success!',
                     description: 'Password Reset',
@@ -30,24 +30,18 @@ function ResetPage() {
     );
 
     useEffect(() => {
-        if (resetLink) {
+        if (resetToken) {
             resetPassword({
                 variables: {
-                    resetLink: resetLink
+                    resetLink: resetToken 
                 }
             });
-        } else {
-            notification.error({
-                message: 'Error',
-                description: 'Invalid or missing reset link.',
-            });
-            navigate('/login');
         }
-    }, [resetLink, resetPassword, navigate]);
+    }, [resetToken, resetPassword]);
 
     return (
         <>
-            {loading && <Spin size={'large'} />}
+            {loading && <Spin size="large" />}
         </>
     );
 }
