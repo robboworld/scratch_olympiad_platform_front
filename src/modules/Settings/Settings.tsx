@@ -21,14 +21,14 @@ function SettingsModule() {
         {
             onError: error => {
                 notification.error({
-                    message: 'Ошибка',
+                    message: 'Error',
                     description: error?.message,
                 })
             },
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Активация по ссылке была изменена.',
+                    message: 'Success!',
+                    description: 'Link activation was changed.',
                 })
             },
             refetchQueries: [{
@@ -38,7 +38,7 @@ function SettingsModule() {
     );
     return (
         <Form form={form}>
-            <Form.Item name='active' label={'Активация по коду'}>
+            <Form.Item name='active' label={'Code activation'}>
                 <Switch
                     checked={getSettings.data?.GetSettings.activationByLink}
                     loading={loading}

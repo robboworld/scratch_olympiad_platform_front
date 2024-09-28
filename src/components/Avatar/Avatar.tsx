@@ -22,11 +22,11 @@ function AvatarComponent() {
     const beforeUpload = (file: RcFile) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
-            message.error('Вы можете загрузить только изображения формата JPG/PNG');
+            message.error('You can only upload images in a JPG/PNG format');
         }
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
-            message.error('Изображение должно быть меньше 2МБ!');
+            message.error('File size needs to be less than 2MB!');
         }
         return isJpgOrPng && isLt2M;
     };

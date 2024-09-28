@@ -12,10 +12,10 @@ function StudentsList() {
     return (
         <>
             <Button type='primary' onClick={() => setOpenAddStudent(true)}>
-                {'Создать'}
+                {'Create'}
             </Button>
             <Modal
-                title={'Создать ученика'}
+                title={'Create a student'}
                 centered
                 open={openAddStudent}
                 onCancel={() => setOpenAddStudent(false)}
@@ -33,13 +33,13 @@ function StudentsList() {
                 defaultActiveKey='1'
                 items={[
                     {
-                        label: 'Активные',
+                        label: 'Active',
                         key: '1',
                         children:
                             <StudentsTab isActive={true} />,
                     },
                     {
-                        label: 'Не активные',
+                        label: 'Not active',
                         key: '2',
                         children:
                             <StudentsTab isActive={false} />,
