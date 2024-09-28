@@ -72,7 +72,7 @@ export const GET_ALL_APPLICATIONS = gql`
     query GetAllApplications($page: Int, $pageSize: Int){
         GetAllApplications(page: $page, pageSize: $pageSize) {
             applications{
-                id
+                authorId
                 nomination
             }
             countRows

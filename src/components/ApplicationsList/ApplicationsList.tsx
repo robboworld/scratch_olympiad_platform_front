@@ -8,6 +8,8 @@ import { useMutation } from "@apollo/client";
 import { GET_ALL_APPLICATIONS } from "@/graphql/query";
 import { handlingGraphqlErrors } from "@/utils";
 
+const { Text, Title } = Typography;
+
 type ApplicationsListProps = WithPaginationProps & {
     loading: boolean;
     data?: ApplicationHttpList;
@@ -25,7 +27,8 @@ function ApplicationsList({
     const applicationLabel = (application: ApplicationHttp) => {
         return (
             <>
-                {application.nomination}
+                <Title level={5}>Author ID:</Title>{application.authorId}
+                <Title level={5}>Nomination:</Title>{application.nomination}
             </>
         )
     }
