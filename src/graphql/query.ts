@@ -68,6 +68,18 @@ export const GET_ALL_PROJECT_PAGES_BY_ACCESS_TOKEN = gql`
     }
 `;
 
+export const GET_ALL_APPLICATIONS = gql`
+    query GetAllApplications($page: Int, $pageSize: Int){
+        GetAllApplications(page: $page, pageSize: $pageSize) {
+            applications{
+                id
+                nomination
+            }
+            countRows
+        }
+    }
+`;
+
 export const GET_ALL_PROJECT_PAGES_BY_AUTHOR_ID = gql`
     query GetAllProjectPagesByAuthorId($id: ID!, $page: Int, $pageSize: Int){
         GetAllProjectPagesByAuthorId(id: $id, page: $page, pageSize: $pageSize) {
