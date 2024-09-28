@@ -10,6 +10,8 @@ import { useState } from 'react';
 import UploadModule from '../Upload';
 import { APPLICATIONS_PAGE_ROUTE } from '@/consts';
 import { useNavigate } from 'react-router-dom';
+import { RuleObject } from 'antd/lib/form'; 
+import { StoreValue } from 'rc-field-form/lib/interface';
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -82,8 +84,12 @@ function ApplicationCreationModule() {
     };
 
     const isFormValid = () => {
-        const fieldsTouched = form.getFieldsValue();
-        return form.isFieldsTouched(['nomination']) && !isNominationInvalid() && !!fieldsTouched.nomination;
+        const fields = form.getFieldsValue();
+    const isNominationValid = form.isFieldsTouched(['nomination']) && !isNominationInvalid() && !!fields.nomination;
+
+    const hasErrors = form.getFieldsError().some(({ errors }) => errors.length);
+
+    return isNominationValid  && !hasErrors;
     };
 
     const handleUploadSuccess = (fileUrl: string, fileType: string) => {
@@ -103,11 +109,42 @@ function ApplicationCreationModule() {
             default:
                 break;
         }
+
+        form.validateFields();
+    };
+
+    const validateContainsSubstring = (substring: string) => (_: RuleObject, value: StoreValue) => {
+        if (!value || value.includes(substring)) {
+            return Promise.resolve();
+        } else {
+            return Promise.reject(new Error(`The link must contain "${substring}"`));
+        }
+    };
+
+    const validateAtLeastOneFilled = (fields: string[]) => {
+        return (_: RuleObject) => {
+            // Use the form context to access values directly
+            const formValues = form.getFieldsValue();
+    
+            // Check if at least one of the specified fields is filled
+            const isFilled = fields.some(field => formValues[field]);
+    
+            if (!isFilled) {
+                return Promise.reject(new Error('At least one of the fields must be filled!'));
+            }
+    
+            return Promise.resolve();
+        };
     };
 
     return (
         <>
-            <Form onFinish={onFinish} form={form}>
+            <Form onFinish={onFinish}
+                form={form}
+                onValuesChange={() => {
+                    form.validateFields();
+                }}
+            >
                 <Form.Item name="applicationType" rules={[{ required: true, message: 'Please select an application type!' }]}>
                     <Select placeholder="Please choose a discipline" size="middle" onChange={handleTypeChange}>
                         <Option value="Scratch">Scratch</Option>
@@ -133,6 +170,9 @@ function ApplicationCreationModule() {
                         <Title level={5}>Enter the link to your Algorithmic task project</Title>
                         <Form.Item
                             name='algorithmicTaskLink'
+                            rules={[
+                                { validator: validateContainsSubstring('scratch.mit.edu/projects/') },
+                            ]}
                         >
                             <Input
                                 placeholder='Enter the link to your Algorithmic task project'
@@ -149,6 +189,9 @@ function ApplicationCreationModule() {
                         <Title level={5}>Enter the link to your Creative task project</Title>
                         <Form.Item
                             name='creativeTaskLink'
+                            rules={[
+                                { validator: validateContainsSubstring('scratch.mit.edu/projects/') },
+                            ]}
                         >
                             <Input
                                 placeholder='Enter the link to your Creative task project'
@@ -170,6 +213,9 @@ function ApplicationCreationModule() {
                         <Title level={5}>Enter the link to your Algorithmic task project</Title>
                         <Form.Item
                             name='algorithmicTaskLink'
+                            rules={[
+                                { validator: validateContainsSubstring('scratch.mit.edu/projects/') },
+                            ]}
                         >
                             <Input
                                 placeholder='Algorithmic ask Link'
@@ -186,6 +232,9 @@ function ApplicationCreationModule() {
                         <Title level={5}>Enter the link to your Engineering task project</Title>
                         <Form.Item
                             name='engineeringTaskCloudLink'
+                            rules={[
+                                { validator: validateContainsSubstring('scratch.mit.edu/projects/') },
+                            ]}
                         >
                             <Input
                                 placeholder='Enter the link to your Engineering task project'
@@ -215,7 +264,7 @@ function ApplicationCreationModule() {
                         </Form.Item>
                     </>
                 )}
-                <Form.Item name='note'>
+                <Form.Item name='note' shouldUpdate noStyle>
                     <Input.TextArea
                         size='large'
                         rows={4}
@@ -232,6 +281,31 @@ function ApplicationCreationModule() {
                         >
                             Apply
                         </Button>
+                    )}
+                </Form.Item>
+
+                <Form.Item shouldUpdate noStyle>
+                    {() => (
+                        <Form.Item
+                            name="atLeastOneFilled" // Optional name, just to tie it to the validator
+                            rules={[
+                            {
+                                validator: validateAtLeastOneFilled([
+                                    'algorithmicTaskLink',
+                                    'algorithmicTaskFile',
+                                    'creativeTaskLink',
+                                    'creativeTaskFile',
+                                    'engineeringTaskCloudLink',
+                                    'engineeringTaskFile',
+                                    'engineeringTaskVideoCloudLink',
+                                    'engineeringTaskVideo',
+                                ]),
+                            },
+                            ]}
+                            style={{ display: 'none' }} // Hide this item from the UI
+                            >
+                                <Input />
+                        </Form.Item>
                     )}
                 </Form.Item>
             </Form>
