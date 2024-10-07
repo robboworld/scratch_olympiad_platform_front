@@ -21,8 +21,8 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
         {
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Пользователь успешно создан.',
+                    message: 'success!',
+                    description: 'User created successfully.',
                 })
             },
             onError: (error) => {
@@ -61,7 +61,7 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваш email',
+                        message: 'Please enter your email.',
                     },
                 ]}
             >
@@ -75,16 +75,16 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваш пароль',
+                        message: 'Please enter your password.',
                     },
                     {
                         min: 8,
-                        message: 'Пароль должен содержать не меньше 8 символов',
+                        message: 'Password needs to be at least 8 characters long.',
                     },
                 ]}
             >
                 <Input.Password
-                    placeholder='Пароль'
+                    placeholder='Password'
                     size='middle'
                 />
             </Form.Item>
@@ -93,20 +93,20 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, повторите пароль',
+                        message: 'Please repeat your password.',
                     },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error('Пароли не совпадают!'));
+                            return Promise.reject(new Error('Passwords are not the same!'));
                         },
                     }),
                 ]}
             >
                 <Input.Password
-                    placeholder='Пароль'
+                    placeholder='Password'
                     size='middle'
                 />
             </Form.Item>
@@ -115,12 +115,12 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите вашу Фамилию!',
+                        message: 'Please enter your second name!',
                     },
                 ]}
             >
                 <Input
-                    placeholder='Фамилия'
+                    placeholder='Second name'
                     size='middle'
                 />
             </Form.Item>
@@ -129,12 +129,12 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваше Имя!',
+                        message: 'Please enter your first name!',
                     },
                 ]}
             >
                 <Input
-                    placeholder='Имя'
+                    placeholder='First name'
                     size='middle'
                 />
             </Form.Item>
@@ -143,12 +143,12 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваше Отчество!',
+                        message: 'Please enter your middle name!',
                     },
                 ]}
             >
                 <Input
-                    placeholder='Отчество'
+                    placeholder='Middle name'
                     size='middle'
                 />
             </Form.Item>
@@ -157,12 +157,12 @@ function CreateUser({ role, refetchQueries }: CreateUserProps) {
                 rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите ваш Nickname!',
+                        message: 'Please enter your Nickname!',
                     },
                 ]}
             >
                 <Input
-                    placeholder='Никнейм'
+                    placeholder='Nickname'
                     size='middle'
                 />
             </Form.Item>

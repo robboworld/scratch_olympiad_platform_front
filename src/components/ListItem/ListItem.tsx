@@ -17,11 +17,11 @@ function ListItem({
 }: ListItemProps) {
     const showDeleteConfirm = () => {
         Modal.confirm({
-            title: 'Вы точно хотите удалить?',
+            title: 'You sure you want to delete?',
             icon: <ExclamationCircleOutlined />,
-            okText: 'Да',
+            okText: 'Yes',
             okType: 'danger',
-            cancelText: 'Отмена',
+            cancelText: 'Cancel',
             onOk() {
                 handleDelete ? handleDelete(String(index)) : () => { return };
             },
@@ -38,10 +38,10 @@ function ListItem({
                 }
             </Typography.Link >
             {
-                handleDelete &&
+                /*handleDelete &&
                 <button className={styles.delete_button} onClick={showDeleteConfirm}>
                     ×
-                </button>
+                </button>*/
             }
 
         </li>

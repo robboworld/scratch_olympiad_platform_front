@@ -3,6 +3,7 @@ import { ConfigProvider } from 'antd';
 import { ApolloProvider } from '@apollo/client';
 
 import PageLayout from '@/modules/PageLayout';
+import CookieConsent from './components/CookieConsent';
 import LoginPage from '@/pages/Login';
 import LogoutPage from '@/pages/Logout';
 import ProfilePage from '@/pages/Profile';
@@ -135,6 +136,7 @@ function App() {
                             />
                         </Routes>
                     </PageLayout>
+                    <CookieConsent />
                 </BrowserRouter>
             </ConfigProvider>
         </ApolloProvider >

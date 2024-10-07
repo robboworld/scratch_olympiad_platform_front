@@ -37,8 +37,8 @@ function ProjectPagesList({
             },
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Страница проекта удалена.',
+                    message: 'Success!',
+                    description: 'Project page deleted.',
                 });
             },
             refetchQueries: [

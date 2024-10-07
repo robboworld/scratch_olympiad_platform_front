@@ -40,7 +40,7 @@ function ProjectsModule() {
                 onClick={() => createProjectPage()}
                 style={{ marginBottom: '0.5rem' }}
             >
-                {'Создать'}
+                {'Create'}
             </Button>
             <ProjectPageList
                 data={data?.GetAllProjectPagesByAccessToken}

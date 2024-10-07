@@ -52,8 +52,8 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
         {
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Страница проекта обновлена.',
+                    message: 'Success!',
+                    description: 'Project page updated.',
                 })
             },
             onError: (error) => {
@@ -74,8 +74,8 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
         {
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Страница проекта обновлена.',
+                    message: 'Success!',
+                    description: 'Project page updated.',
                 })
             },
             onError: (error) => {
@@ -105,7 +105,7 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
         return
     };
     const seeInsideHandler = () => {
-        window.location.replace(process.env.MODE === PRODUCTION ? 'http://92.255.79.9/scratch' + `?#${getProjectPage.data?.GetProjectPageById.id}` : 'http://localhost:8601/' + `?#${getProjectPage.data?.GetProjectPageById.id}`)
+        
     }
     return (
         getProjectPage.loading || getUser.loading ? (
@@ -127,7 +127,7 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
                     <Form.Item name='title'>
                         <Input
                             size='large'
-                            placeholder={'Название'}
+                            placeholder={'Title'}
                             onBlur={(value) => {
                                 updateProjectPage({
                                     variables: {
@@ -147,7 +147,7 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
                         <Input.TextArea
                             size='large'
                             rows={4}
-                            placeholder={'Инструкция'}
+                            placeholder={'Instruction'}
                             onBlur={(value) => {
                                 updateProjectPage({
                                     variables: {
@@ -167,7 +167,7 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
                         <Input.TextArea
                             size='large'
                             rows={4}
-                            placeholder='Заметки'
+                            placeholder='Notes'
                             onBlur={(value) => {
                                 updateProjectPage({
                                     variables: {
@@ -183,21 +183,21 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
                             }}
                         />
                     </Form.Item>
-                    <Form.Item label={'Автор'}>
+                    <Form.Item label={'Author'}>
                         <a onClick={() => openProfileUser(getUser.data?.GetUserById.id || '0', getUser.data?.GetUserById.role || Role.Anonymous)}>{`${getUser.data?.GetUserById.fullName} ${getUser.data?.GetUserById.fullNameNative} `}</a>
                     </Form.Item>
-                    <Form.Item label={'Создан'}>
+                    <Form.Item label={'Created'}>
                         {getProjectPage.data?.GetProjectPageById.createdAt}
                     </Form.Item>
-                    <Form.Item label={'Последнее изменение страницы проекта'}>
+                    <Form.Item label={'Project page last updated'}>
                         {getProjectPage.data?.GetProjectPageById.updatedAt}
                     </Form.Item>
-                    <Form.Item label='Последнее изменение проекта'>
+                    <Form.Item label='Project last updated'>
                         {getProjectPage.data?.GetProjectPageById.projectUpdatedAt}
                     </Form.Item>
                     <Form.Item
                         name='isShared'
-                        label={'Открыть доступ'}
+                        label={'Opened access'}
                         valuePropName='checked'
                     >
                         <Switch onChange={(value) => {
@@ -218,7 +218,7 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
                         userRole == Roles.SuperAdmin ? (
                             <Form.Item
                                 name='isBanned'
-                                label={'Заблокировать проект'}
+                                label={'Project is blocked'}
                             >
                                 <Switch
                                     defaultChecked={getProjectPage.data?.GetProjectPageById?.isBanned}
@@ -233,7 +233,7 @@ function ProjectPageModule({ id }: ProjectPageModuleProps) {
                     <Button
                         type='primary' onClick={seeInsideHandler}
                     >
-                        Открыть в Robbo Scratch
+                        Open in Robbo Scratch
                     </Button>
                 </Form>
             )

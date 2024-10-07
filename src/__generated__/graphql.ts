@@ -42,6 +42,12 @@ export type ApplicationHttp = {
   updatedAt: Scalars['Timestamp']['output'];
 };
 
+export type ApplicationHttpList = {
+  __typename?: 'ApplicationHttpList';
+  applications: Array<ApplicationHttp>;
+  countRows: Scalars['Int']['output'];
+};
+
 export type ApplicationPayloadHttp = {
   __typename?: 'ApplicationPayloadHttp';
   algorithmicTaskFile: Scalars['String']['output'];
@@ -311,6 +317,7 @@ export type ProjectPageHttpList = {
 
 export type Query = {
   __typename?: 'Query';
+  GetAllApplications: ApplicationHttpList;
   GetAllCountries: CountryHttpList;
   GetAllNominations: NominationHttpList;
   GetAllProjectPagesByAccessToken: ProjectPageHttpList;
@@ -325,6 +332,12 @@ export type Query = {
   GetUserByAccessToken: UserHttp;
   GetUserById: UserHttp;
   Me: UserHttp;
+};
+
+
+export type QueryGetAllApplicationsArgs = {
+  page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 

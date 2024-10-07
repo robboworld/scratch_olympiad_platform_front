@@ -39,8 +39,8 @@ function StudentsTab({
             },
             onCompleted: () => {
                 notification.success({
-                    message: 'Успешно!',
-                    description: 'Пользователь удален.',
+                    message: 'Success!',
+                    description: 'User deleted.',
                 });
             },
             refetchQueries: [
