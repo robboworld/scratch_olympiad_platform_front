@@ -13,7 +13,7 @@ function ApplicationsModule() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/application/new');
+        navigate('/new-application');
     };
 
     const { loading, data } = useQuery<{ GetAllApplications: ApplicationHttpList }, { page?: number, pageSize?: number }>(

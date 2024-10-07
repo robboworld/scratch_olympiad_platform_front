@@ -74,6 +74,7 @@ export const GET_ALL_APPLICATIONS = gql`
             applications{
                 authorId
                 nomination
+                id
             }
             countRows
         }
@@ -109,6 +110,27 @@ export const GET_PROJECT_PAGE_BY_ID = gql`
             isShared
             isBanned
             projectUpdatedAt
+        }
+    }
+`;
+
+export const GET_APPLICATION_PAGE_BY_ID = gql`
+    query GetApplicationById($id: ID!){
+        GetApplicationById(id: $id) {
+            id
+            authorId
+            createdAt
+            updatedAt
+            nomination
+            algorithmicTaskLink
+            algorithmicTaskFile
+            creativeTaskLink
+            creativeTaskFile
+            engineeringTaskFile
+            engineeringTaskCloudLink
+            engineeringTaskVideo
+            engineeringTaskVideoCloudLink
+            note
         }
     }
 `;
