@@ -24,9 +24,15 @@ function ApplicationsList({
     data,
     removal,
 }: ApplicationsListProps) {
+    const navigate = useNavigate();
+    const openApplicationPage = (id: number): void => {
+        navigate(`/application/${id}`)
+        return
+    };
     const applicationLabel = (application: ApplicationHttp) => {
         return (
             <>
+                <Title level={5}>Application ID:</Title>{application.id}
                 <Title level={5}>Author ID:</Title>{application.authorId}
                 <Title level={5}>Nomination:</Title>{application.nomination}
             </>
@@ -52,7 +58,7 @@ function ApplicationsList({
                 <ListItem
                     index={index}
                     renderLabel={() => applicationLabel(application)}
-                    handleClick={() => (console.log())}
+                    handleClick={() => openApplicationPage(Number(application.id))}
                     handleDelete={() => (console.log())}
                 />
             )}
