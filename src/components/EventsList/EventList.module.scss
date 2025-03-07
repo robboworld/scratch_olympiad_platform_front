@@ -1,0 +1,54 @@
+
+.ant-list-grid {
+    .ant-col {
+        display: flex;
+    }
+    
+    .ant-list-item {
+        padding: 8px !important;
+        height: 100%;
+        
+        .ant-card {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            
+            &:hover {
+                transform: translateY(-4px);
+            }
+            
+            .ant-card-cover {
+                .image-container {
+                  position: relative;
+                  
+                  .main-image {
+                    transition: transform 0.3s ease;
+                  }
+                  
+                  .thumbnail-row {
+                    margin-top: 0.5rem;
+                    opacity: 0.7;
+                    transition: opacity 0.3s ease;
+                  }
+                }
+                
+                &:hover {
+                  .main-image {
+                    transform: scale(1.05);
+                  }
+                  
+                  .thumbnail-row {
+                    opacity: 1;
+                  }
+                }
+              }
+            
+            .ant-card-meta-title {
+                white-space: normal;
+                margin-bottom: 8px !important;
+            }
+            
+        }
+    }
+}
