@@ -47,6 +47,20 @@ export const CREATE_USER = gql`
     }
 `;
 
+export const CREATE_EVENT = gql`
+    mutation CreateEvent($input: NewEvent!){
+        CreateEvent(input: $input) {
+            ... on EventDetailsHttp {
+                id
+                name
+                description
+                startDate
+                endDate
+            }
+        }
+    }
+`;
+
 export const SET_USER_IS_ACTIVE = gql`
     mutation SetUserIsActive($id: ID!, $isActive: Boolean!){
         SetUserIsActive(id: $id, isActive: $isActive) {

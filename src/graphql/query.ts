@@ -24,6 +24,20 @@ export const GET_USER_BY_ID = gql`
     }
 `;
 
+export const GET_EVENT_BY_ID = gql`
+    query GetEventById($id: ID!){
+        GetEventById(id: $id) {
+            ... on EventDetailsHttp {
+                id
+                name
+                description
+                startDate
+                endDate
+            }
+        }
+    }
+`;
+
 export const ME = gql`
     query {
         Me {

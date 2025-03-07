@@ -31,8 +31,8 @@ function ListItem({
         })
     }
     return (
-        <li className={styles.list_item_card}>
-            <Typography.Link className={styles.label_card} onClick={handleClick}>
+        <li className={styles.list_item}>
+            <Typography.Link className={styles.label} onClick={handleClick}>
                 {
                     renderLabel()
                 }

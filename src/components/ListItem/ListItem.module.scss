@@ -35,37 +35,3 @@
     width: 100%;
     box-sizing: border-box;
 }
-
-.label_card {
-    text-decoration: none;
-    color: black;
-    width: 100%;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    
-    &:hover {
-        .product-title {
-            color: #44A444;
-        }
-    }
-}
-
-.list_item_card {
-    cursor: pointer;
-    list-style: none;
-    background: white;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    
-    &:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transform: translateY(-2px);
-    }
-}
