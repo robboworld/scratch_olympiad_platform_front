@@ -75,6 +75,18 @@ export const GET_ALL_APPLICATIONS = gql`
     }
 `;
 
+export const GET_ALL_EVENTS = gql`
+    query GetAllEvents($page: Int, $pageSize: Int){
+        GetAllEvents(page: $page, pageSize: $pageSize) {
+            events{
+                id
+                name
+            }
+            countRows
+        }
+    }
+`;
+
 export const GET_APPLICATION_PAGE_BY_ID = gql`
     query GetApplicationById($id: ID!){
         GetApplicationById(id: $id) {

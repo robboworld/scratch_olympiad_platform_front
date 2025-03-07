@@ -17,6 +17,7 @@ import ApplicationCreationPage from './pages/ApplicationCreation';
 import UserAgreementPage from './pages/UserAgreement';
 import PersonalDataProcessingPage from './pages/PersonalDataProcessing';
 import HomePage from './pages/HomePage';
+import EventsPage from './pages/Events';
 import {
     MAIN_PAGE_ROUTE,
     ACTIVATION_PAGE_ROUTE,
@@ -31,6 +32,7 @@ import {
     USER_AGREEMENT_PAGE_ROUTE,
     PERSONAL_DATA_PROCESSING_ROUTE,
     APPLICATION_PAGE_ROUTE,
+    EVENTS_PAGE_ROUTE,
 } from '@/consts';
 import { darkThemeConfig, defaultThemeConfig } from '@/themeConfig';
 import { useAppSelector } from '@/store';
@@ -73,6 +75,14 @@ function App() {
                                 element={
                                     <ProtectedRoute allowedRoles={[Roles.SuperAdmin, Roles.User]}>
                                         <ApplicationsPage />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path={EVENTS_PAGE_ROUTE}
+                                element={
+                                    <ProtectedRoute allowedRoles={[Roles.SuperAdmin, Roles.User]}>
+                                        <EventsPage />
                                     </ProtectedRoute>
                                 }
                             />
