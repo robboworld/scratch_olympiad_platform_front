@@ -8,6 +8,7 @@ import logo from '@/assets/ScratchOlympiad-2024_logo_1440x643.png';
 import { useAppSelector } from '@/store';
 import { useState } from 'react';
 import UpdateEventModal from '../UpdateEventModal';
+import EventApplicationModal from '../EventApplicationModal';
 import { GET_ALL_EVENTS } from "@/graphql/query";
 
 const { Text } = Typography;
@@ -20,6 +21,7 @@ function EventCard({ event }: EventCardProps) {
 
     const { userRole } = useAppSelector(state => state.authReducer);
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalDetailsVisible, setModalDetailsVisible] = useState(false);
 
   const { data, loading, error, refetch } = useQuery<{ GetEventById: EventDetailsHttp }>(
     GET_EVENT_BY_ID,
@@ -42,7 +44,7 @@ function EventCard({ event }: EventCardProps) {
 
   return (
     <>
-    <Card
+    <Card onClick={() => setModalDetailsVisible(true)}
       hoverable
       cover={
         <div style={{ 
@@ -122,6 +124,13 @@ function EventCard({ event }: EventCardProps) {
                 refetchQueries={[{
                     query: GET_ALL_EVENTS
                 }]}
+            />
+
+
+            <EventApplicationModal
+                eventId={event.id}
+                visible={modalDetailsVisible}
+                onCancel={() => setModalDetailsVisible(false)}
             />
     </>
   );
