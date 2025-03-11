@@ -3,7 +3,12 @@ import { Card, Button, Typography, Skeleton } from 'antd';
 import { handlingGraphqlErrors } from '@/utils';
 import { EventHttp, EventDetailsHttp } from '@/__generated__/graphql';
 import { GET_EVENT_BY_ID } from '@/graphql/query';
+import { UPDATE_EVENT } from '@/graphql/mutations';
 import logo from '@/assets/ScratchOlympiad-2024_logo_1440x643.png';
+import { useAppSelector } from '@/store';
+import { useState } from 'react';
+import UpdateEventModal from '../UpdateEventModal';
+import { GET_ALL_EVENTS } from "@/graphql/query";
 
 const { Text } = Typography;
 
@@ -12,7 +17,11 @@ interface EventCardProps {
 }
 
 function EventCard({ event }: EventCardProps) {
-  const { data, loading, error } = useQuery<{ GetEventById: EventDetailsHttp }>(
+
+    const { userRole } = useAppSelector(state => state.authReducer);
+    const [modalVisible, setModalVisible] = useState(false);
+
+  const { data, loading, error, refetch } = useQuery<{ GetEventById: EventDetailsHttp }>(
     GET_EVENT_BY_ID,
     {
       variables: { id: event.id },
@@ -26,7 +35,13 @@ function EventCard({ event }: EventCardProps) {
     return <>{data?.GetEventById.description}</>;
   };
 
+  const handleUpdateSuccess = () => {
+    setModalVisible(false);
+    refetch();
+    };
+
   return (
+    <>
     <Card
       hoverable
       cover={
@@ -73,9 +88,16 @@ function EventCard({ event }: EventCardProps) {
         </div>
       }
       actions={[
-        <Button type="link" onClick={() => console.log('View details')}>
-          Edit
-        </Button>,
+        <div>
+            {userRole === 'SuperAdmin' && (
+                <Button
+                    type="link"
+                    onClick={() => setModalVisible(true)}
+                >
+                    {'Edit'}
+                </Button>
+            )}
+        </div>,
         <Button danger type="link" onClick={() => console.log('Delete')}>
           Delete
         </Button>,
@@ -91,6 +113,17 @@ function EventCard({ event }: EventCardProps) {
         }
       />
     </Card>
+
+    <UpdateEventModal
+                eventId={event.id}
+                visible={modalVisible}
+                onCancel={() => setModalVisible(false)}
+                onSuccess={handleUpdateSuccess}
+                refetchQueries={[{
+                    query: GET_ALL_EVENTS
+                }]}
+            />
+    </>
   );
 }
 

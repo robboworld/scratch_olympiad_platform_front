@@ -13,6 +13,34 @@ export const UPDATE_USER = gql`
     }
 `;
 
+export const UPDATE_EVENT = gql`
+    mutation UpdateEvent($input: UpdateEvent!){
+        UpdateEvent(input: $input) {
+            ... on EventDetailsHttp {
+                id
+                name
+                description
+                startDate
+                endDate
+            }
+        }
+    }
+`;
+
+export const UPDATE_EVENT_TRANSLATION = gql`
+    mutation UpdateEventTranslation($input: UpdateEventTranslation!){
+        UpdateEventTranslation(input: $input) {
+            ... on EventTranslationHttp {
+                id
+                name
+                description
+                startDate
+                endDate
+            }
+        }
+    }
+`;
+
 export const SIGN_IN = gql`
     mutation SignIn($input: SignIn!){
         SignIn(input: $input) {
@@ -56,6 +84,19 @@ export const CREATE_EVENT = gql`
                 description
                 startDate
                 endDate
+            }
+        }
+    }
+`;
+
+export const CREATE_EVENT_TRANSLATION = gql`
+    mutation CreateEventTranslation($input: NewEventTranslation!){
+        CreateEventTranslation(input: $input) {
+            ... on EventTranslationHttp {
+                id
+                name
+                description
+                eventId
             }
         }
     }
