@@ -17,7 +17,6 @@ function EventsModule() {
     const navigate = useNavigate();
     const { userRole } = useAppSelector(state => state.authReducer);
 
-    // Added refetch from useQuery
     const { loading, data, refetch } = useQuery<{ GetAllEvents: EventHttpList }, { page?: number, pageSize?: number }>(
         GET_ALL_EVENTS,
         {
@@ -32,7 +31,7 @@ function EventsModule() {
         refetch();
     };
 
-    const EventList = withPaginationUrl(EventsList, 10);
+    const EventList = withPaginationUrl(EventsList, 8);
 
     return (
         <>
