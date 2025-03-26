@@ -24,6 +24,20 @@ export const GET_USER_BY_ID = gql`
     }
 `;
 
+export const GET_EVENT_BY_ID = gql`
+    query GetEventById($id: ID!){
+        GetEventById(id: $id) {
+            ... on EventDetailsHttp {
+                id
+                name
+                description
+                startDate
+                endDate
+            }
+        }
+    }
+`;
+
 export const ME = gql`
     query {
         Me {
@@ -69,6 +83,18 @@ export const GET_ALL_APPLICATIONS = gql`
                 authorId
                 nomination
                 id
+            }
+            countRows
+        }
+    }
+`;
+
+export const GET_ALL_EVENTS = gql`
+    query GetAllEvents($page: Int, $pageSize: Int){
+        GetAllEvents(page: $page, pageSize: $pageSize) {
+            events{
+                id
+                name
             }
             countRows
         }
